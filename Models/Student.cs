@@ -3,17 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LectureAttendance.Models
 {
-    public class Student 
+    public class Student : Person
     {
-        [Key]
-        public int SId { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
         public string Level { get; set; }
-        public string Phone { get; set;}
-        public string DateOfBirth { get; set; } 
-      
-
+        public virtual ICollection<Enrollment> Enrollments { get; set; }
+        public virtual ICollection<InstructorStudent> InstructorStudents { get; set; }
 
     }
 }

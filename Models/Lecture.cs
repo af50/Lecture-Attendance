@@ -5,11 +5,11 @@ namespace LectureAttendance.Models
     public class Lecture
     {
         [Key]
-        public virtual ICollection<Course> Courses { get; set; }
-        [Key]
-        public virtual ICollection<Instructor> Instuctors { get; set; }
+        public int LId { get; set; }
         public string Location { get; set; }
         public string DateOfLecture { get; set; }
 
+        public virtual Instructor Instructors { get; set; }
+        public virtual Course Courses { get; set; }
     }
 }

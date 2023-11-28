@@ -9,7 +9,9 @@ namespace LectureAttendance.Models
         public string CId { get; set; }
         public string Name { get; set; }
 
-        
+        public virtual ICollection<Lecture> Lectures { get; set; }
+        public virtual ICollection<Enrollment> Enrollments { get; set; }
+
 
 
 

@@ -4,13 +4,11 @@ namespace LectureAttendance.Models
 {
     public class Enrollment
     {
-        [Key]
-        public virtual ICollection<Course> Courses { get; set; }
-
-        [Key]
-        public virtual ICollection<Student> Students { get; set; }
-
+        [Key] 
+        public int Id { get; set; }
         public string EnrollmentDate { get; set; }  
-
+        public string Instrcutor { get; set; }
+        public virtual Student Students { get; set; }
+        public virtual Course Courses { get; set; }
     }
 }

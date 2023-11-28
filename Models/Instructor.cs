@@ -2,14 +2,11 @@
 
 namespace LectureAttendance.Models
 {
-    public class Instructor
+    public class Instructor : Person
     {
-        [Key]
-        public string IId { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string DateOfBirth { get; set; }
-
+        public string Department { get; set; }
+        
+        public virtual ICollection<Lecture> Lectures { get; set; }
+        public virtual ICollection<InstructorStudent> InstructorStudents { get; set; }
     }
 }

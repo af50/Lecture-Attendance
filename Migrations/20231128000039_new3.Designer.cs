@@ -4,6 +4,7 @@ using LectureAttendance.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LectureAttendance.Migrations
 {
     [DbContext(typeof(PContext))]
-    partial class PContextModelSnapshot : ModelSnapshot
+    [Migration("20231128000039_new3")]
+    partial class new3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,7 +35,7 @@ namespace LectureAttendance.Migrations
 
                     b.HasKey("CId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("courses");
                 });
 
             modelBuilder.Entity("LectureAttendance.Models.Enrollment", b =>
@@ -61,7 +64,7 @@ namespace LectureAttendance.Migrations
 
                     b.HasIndex("StudentsId");
 
-                    b.ToTable("Enrollments");
+                    b.ToTable("enrollments");
                 });
 
             modelBuilder.Entity("LectureAttendance.Models.Instructor", b =>
@@ -93,7 +96,7 @@ namespace LectureAttendance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instructors");
+                    b.ToTable("instructors");
                 });
 
             modelBuilder.Entity("LectureAttendance.Models.InstructorStudent", b =>
@@ -116,7 +119,7 @@ namespace LectureAttendance.Migrations
 
                     b.HasIndex("StudentsId");
 
-                    b.ToTable("InstructorsStudents");
+                    b.ToTable("instructorsStudents");
                 });
 
             modelBuilder.Entity("LectureAttendance.Models.Lecture", b =>
@@ -177,7 +180,7 @@ namespace LectureAttendance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("students");
                 });
 
             modelBuilder.Entity("LectureAttendance.Models.Enrollment", b =>
