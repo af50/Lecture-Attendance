@@ -11,5 +11,6 @@ namespace LectureAttendance.Models
         public string Phone { get; set; }
         public string DateOfBirth { get; set; }
         public char Gender { get; set; }
+        public string password { get; set; }
     }
 }

@@ -4,7 +4,23 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<head>
+    <title>Sign in</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-5.3.2-dist/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+</head>
+
+
+    <body>
+   
+        <h2 style="text-align: center; margin-top: 300px;">There is no lectures available,you have to register</h2>
+
+    <div style="text-align: center;  margin-bottom:1000px">
+        
+        <a asp-page="login/Index" >sign in</a>
+        <p style="display:inline">or</p>
+        <a asp-page="Signup/Index">sign up</a>
+    </div>
+
+    </body>

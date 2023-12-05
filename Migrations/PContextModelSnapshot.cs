@@ -91,6 +91,9 @@ namespace LectureAttendance.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Instructors");
@@ -173,6 +176,9 @@ namespace LectureAttendance.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("password")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
