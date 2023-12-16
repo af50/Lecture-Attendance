@@ -1,26 +1,32 @@
 ﻿@page
 @model LectureAttendance.Pages.Login.IndexModel
-@{
-}
 <div class="a">
     <div class="container-fluid">
-        <form action="" id="loginForm">
+        <form action="" id="loginForm" method="post">
             <h1 style="margin-bottom:5%;">Sign in</h1>
             
-            <input type="text" email="user1" class="form-control" placeholder="Enter your email...">
+            @{
+                if(Model.ErrorMessage is not null)
+                {
+                    <div><strong>@Model.ErrorMessage</strong></div>
+                }
+            }
+            <input type="text" asp-for="@Model.Email" email="user1" class="form-control" placeholder="Enter your email...">
             <br />
+            <input type="password" asp-for="@Model.Password" password="pass1" class="form-control" placeholder="Enter your Password...">
+            <span asp-validation-for="@Model.Password">
 
-            <input type="password" password="pass1" class="form-control" placeholder="Enter your Password...">
+            </span>
             <br />
-            
+             
            
 
-            <button type="button" class="btn" style="  display: inline-block;
+            <button type="submit" class="btn" style="  display: inline-block;
           background-color: #172432;
           border: none;
           color: #ddd;
           padding: 10px 20px;
-          border-radius: 5px;" onclick=" haa()">
+          border-radius: 5px;">
                 sign in
             </button>
         </form>

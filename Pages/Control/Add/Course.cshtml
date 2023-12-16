@@ -1,0 +1,36 @@
+﻿@page
+@model LectureAttendance.Pages.Control.Add.CourseModel
+@{
+}
+<title>Sign up</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="bootstrap-5.3.2-dist/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+    <div class="a">
+        <div class="container">
+            <form action="" id="loginForm">
+                <h1 style="margin-bottom:5% ; margin-top: 5%;">Add a new course</h1>
+
+                <input type="text" id="CourseName" class="form-control" asp-for=@Model.CourseName placeholder="Enter Course name here...">
+                <br>
+
+                <input type="text" id="CourseID" class="form-control" asp-for=@Model.CourseCode placeholder="Enter Course code here...">
+            </form>
+
+
+
+
+            <br />
+            <button type="button" class="btn" style="  display: inline-block;
+                    background-color: #172432;
+                    border: none;
+                    color: #ddd;
+                    padding: 10px 20px;
+                    border-radius: 5px;">
+                Submit
+            </button>
+
+        </div>
+    </div>
+
+ 

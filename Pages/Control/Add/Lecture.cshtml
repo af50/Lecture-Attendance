@@ -1,0 +1,96 @@
+﻿@page
+@model LectureAttendance.Pages.Control.Add.LectureModel
+@{
+}
+
+
+<head>
+    <title>Sign up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-5.3.2-dist/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="a">
+        <div class="container-fluid">
+            <form action="" id="loginForm" method="post">
+                <br />
+                <h1 style="margin-bottom:5%;">Add a new lecture</h1>
+
+                @{
+                    if (Model.ErrorMessage is not null)
+                    {
+                        <div><strong>@Model.ErrorMessage</strong></div>
+                    }
+                }
+
+                <br />
+
+
+                @*    <fieldset>
+                <label>Register as</label>
+                <select id="tp">
+                <option value="Student">Student</option>
+                <option value="Instructor">Instructor</option>
+                </select>
+                </fieldset>
+                <br /> <br /> *@
+                <fieldset id="">
+                    <label>Choose the lecture location from here:</label>
+                    <select asp-for="@Model.Location">
+                        <option value="">Lecture hall 1</option>
+                        <option value="">Lecture hall 2</option>
+                        <option value="">Lecture hall 3</option>
+                        <option value="">Lecture hall 4</option>
+                    </select>
+                </fieldset>                <br />
+                <label>Enter the lecture date:</label>
+                <input asp-for="@Model.DateOfLecture" type="date" phone="user1" class="form-control">
+                <br />
+                <fieldset id="">
+                    <label>Choose the lecture instructor from here:</label>
+                    <select asp-for="@Model.Instructor">
+                        <option value="">Dr. Ahmed Hosny</option>
+                        <option value="">Dr. Ali Mohammed</option>
+                        <option value="">Dr. Omer Ali</option>
+                        <option value="">Dr. Ahmed Galal</option>
+                    </select>
+                </fieldset>
+                <br />
+                <fieldset id="">
+                    <label>Choose the lecture course from here:</label>
+                    <select asp-for="@Model.Course">
+                        <option value="">CS50</option>
+                        <option value="">IS201</option>
+                        <option value="">IT304</option>
+                        <option value="">MM405</option>
+                    </select>
+                </fieldset>
+                <br />
+
+                <br />
+
+
+
+
+
+
+
+
+
+
+                <button type="submit" class="btn" style="  display: inline-block;
+          background-color: #172432;
+          border: none;
+          color: #ddd;
+          padding: 10px 20px;
+          border-radius: 5px;" onclick=" haa()">
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+
+</body>

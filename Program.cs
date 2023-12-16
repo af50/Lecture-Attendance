@@ -5,7 +5,7 @@ namespace LectureAttendance
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            builder.Services.AddSession();
             // Add services to the container.
             builder.Services.AddRazorPages();
 
@@ -21,7 +21,7 @@ namespace LectureAttendance
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

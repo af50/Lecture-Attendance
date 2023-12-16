@@ -6,13 +6,25 @@ namespace LectureAttendance.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CollegeDB;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=LectureAttendance;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Enrollment>()
+                .HasKey(e => new { e.CourseId, e.StudentId });
+
+            modelBuilder.Entity<InstructorStudent>()
+                .HasKey(e => new { e.StudentId, e.InstructorId });
+
+            modelBuilder.Entity<Lecture>()
+                .HasKey(e => new { e.CourseId, e.InstructorId, e.DateOfLecture });
+        }
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<Student> Students {  get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
-        public DbSet<InstructorStudent> InstructorsStudents { get;set; }
+        public DbSet<InstructorStudent> InstructorsStudents { get; set; }
     }
 }

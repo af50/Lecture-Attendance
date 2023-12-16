@@ -3,35 +3,34 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
-namespace LectureAttendance.Pages.Login
+namespace LectureAttendance.Pages.Control.Add
 {
-    public class IndexModel : PageModel
+    public class CourseModel : PageModel
     {
         [Required]
         [BindProperty]
-        public string Email { get; set; }
+        public string CourseCode { get; set; }
         [Required]
         [BindProperty]
-        public string Password { get; set; }
+        public string CourseName { get; set; }
         public string ErrorMessage { get; set; }
         public void OnGet()
         {
-       
- 
+
         }
         public IActionResult OnPost()
         {
             PContext db = new PContext();
-            if(db.Students.SingleOrDefault(student => student.Email == Email) == null || 
-                db.Students.SingleOrDefault(student => BCrypt.Net.BCrypt.Verify(Password, student.Password)) == null)
+            if (db.Courses.SingleOrDefault(course => course.Name == CourseName) == null ||
+                db.Courses.SingleOrDefault(course => course.CourseId == CourseCode) == null)
             {
-                ErrorMessage = "Invalid Email or Password!";
+                ErrorMessage = "Invalid Code or Name!";
                 return Page();
             }
             else
             {
                 ErrorMessage = "hello, world";
-                return RedirectToPage("/Index");
+                return RedirectToPage("/Add/Course");
             }
         }
     }
