@@ -50,7 +50,7 @@ namespace LectureAttendance.Pages.Control.Add
                 newStudent.Level = Level[0];
                 db.Students.Add(newStudent);
                 db.SaveChanges();
-                successMessage = "The student added successfully!";
+                successMessage = "The course added successfully!";
                 Id = "";
                 Name = "";
                 Email = "";

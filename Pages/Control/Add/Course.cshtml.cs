@@ -7,31 +7,39 @@ namespace LectureAttendance.Pages.Control.Add
 {
     public class CourseModel : PageModel
     {
-        [Required]
-        [BindProperty]
-        public string CourseCode { get; set; }
-        [Required]
-        [BindProperty]
-        public string CourseName { get; set; }
-        public string ErrorMessage { get; set; }
-        public void OnGet()
-        {
 
-        }
-        public IActionResult OnPost()
+
+        [Required(ErrorMessage = "This field is required")]
+        [BindProperty]
+        public string Id { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [BindProperty]
+        public string Name { get; set; }
+
+
+        public string errorMessage = "";
+        public string successMessage = "";
+        public void OnPost()
         {
-            PContext db = new PContext();
-            if (db.Courses.SingleOrDefault(course => course.Name == CourseName) == null ||
-                db.Courses.SingleOrDefault(course => course.CourseId == CourseCode) == null)
+            if (ModelState.IsValid)
             {
-                ErrorMessage = "Invalid Code or Name!";
-                return Page();
+                PContext db = new PContext();
+                Course course = new Course();
+                course.CourseId = Id;
+                course.Name = Name;
+                db.Add(course);
+                db.SaveChanges();
+                successMessage = "The student added successfully!";
+                Id = "";
+                Name = "";
+                ModelState.Clear();
             }
             else
             {
-                ErrorMessage = "hello, world";
-                return RedirectToPage("/Add/Course");
+                errorMessage = "There is something wrong.";
+                return;
             }
         }
+        } 
     }
-}
+

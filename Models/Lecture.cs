@@ -14,7 +14,11 @@ namespace LectureAttendance.Models
         [Required]
         public string DateOfLecture { get; set; }
         [Required]
-        public string Time { get; set; }
+        public string StartTime { get; set; }
+        [Required]
+        public string EndTime{ get; set; }
+
+
         public virtual Instructor Instructors { get; set; }
         public virtual Course Courses { get; set; }
     }

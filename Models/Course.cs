@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LectureAttendance.Models
@@ -9,8 +8,11 @@ namespace LectureAttendance.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string CourseId { get; set; }
+
         [Required]
         public string Name { get; set; }
+
+
         public virtual ICollection<Instructor> Instructors { get; set; }
         public virtual ICollection<Lecture> Lectures { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }

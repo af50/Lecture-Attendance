@@ -12,6 +12,28 @@
 </head>
 
 <body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Add/Student">Add</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" asp-page="#">Update</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="#">Delete</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
     <div class="a">
         <div class="container-fluid">
@@ -19,75 +41,105 @@
                 <br />
                 <h1 style="margin-bottom:5%;">Add a new lecture</h1>
 
-                @{
-                    if (Model.ErrorMessage is not null)
-                    {
-                        <div><strong>@Model.ErrorMessage</strong></div>
-                    }
+                @if (Model.errorMessage.Length > 0)
+                {
+                           <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                               <strong>@Model.errorMessage</strong>
+                               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                           </div>
+                }
+                else if (Model.successMessage.Length > 0)
+                {
+                          <div class="alert alert-success alert-dismissible fade show" role="alert">
+                              <strong>@Model.successMessage</strong>
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
                 }
 
-                <br />
-
-
-                @*    <fieldset>
-                <label>Register as</label>
-                <select id="tp">
-                <option value="Student">Student</option>
-                <option value="Instructor">Instructor</option>
-                </select>
-                </fieldset>
-                <br /> <br /> *@
-                <fieldset id="">
-                    <label>Choose the lecture location from here:</label>
-                    <select asp-for="@Model.Location">
-                        <option value="">Lecture hall 1</option>
-                        <option value="">Lecture hall 2</option>
-                        <option value="">Lecture hall 3</option>
-                        <option value="">Lecture hall 4</option>
-                    </select>
-                </fieldset>                <br />
-                <label>Enter the lecture date:</label>
-                <input asp-for="@Model.DateOfLecture" type="date" phone="user1" class="form-control">
-                <br />
-                <fieldset id="">
-                    <label>Choose the lecture instructor from here:</label>
-                    <select asp-for="@Model.Instructor">
-                        <option value="">Dr. Ahmed Hosny</option>
-                        <option value="">Dr. Ali Mohammed</option>
-                        <option value="">Dr. Omer Ali</option>
-                        <option value="">Dr. Ahmed Galal</option>
-                    </select>
-                </fieldset>
+                
+                
                 <br />
                 <fieldset id="">
                     <label>Choose the lecture course from here:</label>
-                    <select asp-for="@Model.Course">
-                        <option value="">CS50</option>
-                        <option value="">IS201</option>
-                        <option value="">IT304</option>
-                        <option value="">MM405</option>
+                    <select asp-for="CName">
+                        <option>Choose</option>
+                        @foreach (var course in Model.CoursesList())
+                        {
+                                <option value="@course">@course</option>
+                        }
                     </select>
                 </fieldset>
+                <span asp-validation-for="CName" class="text-danger"></span>
                 <br />
 
+
+
+                
                 <br />
+                <fieldset id="">
+                    <label>Choose the lecture instructor from here:</label>
+                    <select asp-for="IName">
+                      <option>Choose</option>
+                        @foreach(var instructor in Model.InstructorsList())
+                        {
+                            <option value="@instructor">@instructor</option>
+                        }
+                    </select>
+                </fieldset>
+                <span asp-validation-for="IName" class="text-danger"></span>
+                
+                
+                 <br />
+                 <fieldset>
+                    <label>Choose the lecture location from here:</label>
+                    <select asp-for="Location">
+                        <option value="Lecture hall 1">Lecture hall 1</option>
+                        <option value="Lecture hall 2">Lecture hall 2</option>
+                        <option value="Lecture hall 3">Lecture hall 3</option>
+                        <option value="Lecture hall 4">Lecture hall 4</option>
+                        <option value="Lecture hall 5">Lecture hall 5</option>
+                        <option value="Lecture hall 6">Lecture hall 6</option>
+                        <option value="Lecture hall 7">Lecture hall 7</option>
+                        <option value="Lecture hall 8">Lecture hall 8</option>
+                        <option value="Lecture hall 9">Lecture hall 9</option>
+                    </select>
+                </fieldset> 
+                <span asp-validation-for="Location" class="text-danger"></span>
+
+
+              
 
 
 
 
+                <br /> 
+                <label>Enter the lecture date:</label>
+                <input asp-for="DateOfLecture" type="date" phone="user1" class="form-control">
+                <span asp-validation-for="DateOfLecture" class="text-danger"></span>
+                
+
+                <br />
+                <label>Enter the lecture start time:</label>
+                <input asp-for="StartTime" type="time" phone="user1" class="form-control">
+                <span asp-validation-for="StartTime" class="text-danger"></span>
 
 
+                <br  />
 
+                
 
+                <label>Enter the lecture end time:</label>
+                <input asp-for="EndTime" type="time" phone="user1" class="form-control">
+                <span asp-validation-for="EndTime" class="text-danger"></span>
 
-
+                <br />
                 <button type="submit" class="btn" style="  display: inline-block;
           background-color: #172432;
           border: none;
           color: #ddd;
           padding: 10px 20px;
-          border-radius: 5px;" onclick=" haa()">
-                    Submit
+          border-radius: 5px;">
+                    Add
                 </button>
             </form>
         </div>

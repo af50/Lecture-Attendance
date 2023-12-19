@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LectureAttendance.Migrations
 {
     [DbContext(typeof(PContext))]
-    [Migration("20231216225255_new")]
-    partial class @new
+    [Migration("20231219142155_new1")]
+    partial class new1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -168,6 +168,10 @@ namespace LectureAttendance.Migrations
 
                     b.Property<string>("DateOfLecture")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
                         .IsRequired()
