@@ -38,7 +38,6 @@
     <div class="a">
         <div class="container-fluid">
             <form action="" id="loginForm" method="post">
-                <br />
                 <h1 style="margin-bottom:5%;">Add A New Lecture</h1>
 
                 @if (Model.errorMessage.Length > 0)
@@ -58,9 +57,8 @@
 
                 
                 
-                <br />
                 <fieldset id="">
-                    <label>Choose the lecture course from here:</label>
+                    <label>Lecture Course</label>
                     <select asp-for="CourseName">
                         @*<option>Choose</option>*@
                         @foreach (var course in Model.CoursesList())
@@ -75,9 +73,8 @@
 
 
                 
-                <br />
                 <fieldset id="">
-                    <label>Choose the lecture instructor from here:</label>
+                    <label>Lecture Instructor</label>
                     <select asp-for="InstructorName">
                       @* <option>Choose</option> *@
                         @foreach(var instructor in Model.InstructorsList())
@@ -91,7 +88,7 @@
                 
                  <br />
                  <fieldset>
-                    <label>Choose the lecture location from here:</label>
+                    <label>Lecture Location</label>
                     <select asp-for="Location">
                         <option value="Lecture hall 1">Lecture hall 1</option>
                         <option value="Lecture hall 2">Lecture hall 2</option>
@@ -113,13 +110,13 @@
 
 
                 <br /> 
-                <label>Enter the lecture date:</label>
+                <label>Lecture Date</label>
                 <input asp-for="DateOfLecture" type="date" phone="user1" class="form-control">
                 <span asp-validation-for="DateOfLecture" class="text-danger"></span>
                 
 
                 <br />
-                <label>Enter the lecture start time:</label>
+                <label>Lecture Start Time</label>
                 <input asp-for="StartTime" type="time" phone="user1" class="form-control">
                 <span asp-validation-for="StartTime" class="text-danger"></span>
 
@@ -128,7 +125,7 @@
 
                 
 
-                <label>Enter the lecture end time:</label>
+                <label>Lecture End Time</label>
                 <input asp-for="EndTime" type="time" phone="user1" class="form-control">
                 <span asp-validation-for="EndTime" class="text-danger"></span>
 

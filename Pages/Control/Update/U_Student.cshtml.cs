@@ -46,13 +46,12 @@ namespace LectureAttendance.Pages.Control.Update
         public string successMessage = "";
         public bool flag = false;
 
-        [BindProperty]
-        public string parameter1 {  get; set; }
+        public bool ID;
 
 
         public void OnPost()
         {
-            if (parameter1 == "ID")
+            if (ID == false)
             {
                 flag = true;
 
@@ -77,7 +76,7 @@ namespace LectureAttendance.Pages.Control.Update
             }
             else
             {
-                if (true)
+                if (ModelState.IsValid)
                 {
                     Student UpdatedStudent = new Student();
 

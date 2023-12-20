@@ -19,7 +19,7 @@ namespace LectureAttendance.Pages.Control.Add
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
-        public string Level { get; set; }
+        public char Level { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
@@ -37,7 +37,7 @@ namespace LectureAttendance.Pages.Control.Add
 
         [BindProperty]
         [Required]
-        public string Gender { get; set; }
+        public char Gender { get; set; }
 
 
         public string errorMessage = "";
@@ -52,11 +52,11 @@ namespace LectureAttendance.Pages.Control.Add
                 newStudent.StudentId = Id;
                 newStudent.Name = Name;
                 newStudent.Email = Email;
-                newStudent.Gender = Gender[0];
+                newStudent.Gender = Gender;
                 newStudent.Phone = Phone;
                 newStudent.Password = BCrypt.Net.BCrypt.HashPassword(Password);
                 newStudent.DateOfBirth = BirthDate;
-                newStudent.Level = Level[0];
+                newStudent.Level = Level;
                 db.Students.Add(newStudent);
                 db.SaveChanges();
                 successMessage = "The Student Added Successfully!";
@@ -65,8 +65,8 @@ namespace LectureAttendance.Pages.Control.Add
                 Name = "";
                 Email = "";
                 Password = "";
-                Level = "";
-                Gender = "";
+                Level = '\0';
+                Gender = '\0';
                 Phone = "";
                 BirthDate = "";
                 errorMessage = "";
