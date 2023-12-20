@@ -8,41 +8,50 @@ namespace LectureAttendance.Pages.Control.Add
 {
     public class InstructorModel : PageModel
     {
+        PContext db = new PContext();
 
         [BindProperty]
-        [Required(ErrorMessage = "This field is required")]
+        [Required(ErrorMessage = "This Field Is Required")]
         public string Id { get; set; }
+
         [BindProperty]
-        [Required(ErrorMessage = "This field is required")]
+        [Required(ErrorMessage = "This Field Is Required")]
         public string Name { get; set; }
+
         [BindProperty]
-        [Required(ErrorMessage = "This field is required")]
-        public string DepartInstructor { get; set; }
+        [Required(ErrorMessage = "This Field Is Required")]
+        public string Depart { get; set; }
+
         [BindProperty]
-        [Required(ErrorMessage = "This field is required")]
+        [Required(ErrorMessage = "This Field Is Required")]
         public string Email { get; set; }
+
         [BindProperty]
-        [Required(ErrorMessage = "This field is required")]
+        [Required(ErrorMessage = "This Field Is Required")]
         public string Password { get; set; }
+
         [BindProperty]
         public string Phone { get; set; }
+
         [BindProperty]
         public string BirthDate { get; set; }
+
         [BindProperty]
         [Required]
         public string Gender { get; set; }
+
+
         public string errorMessage = "";
         public string successMessage = "";
-        public void OnGet()
-        {
-        }
+
+
         public void OnPost()
         {
 
             if (ModelState.IsValid)
             {
-                PContext db = new PContext();
                 Instructor newInstructor = new Instructor();
+
                 newInstructor.InstructorId = Id;
                 newInstructor.Name = Name;
                 newInstructor.Phone = Phone;
@@ -50,25 +59,31 @@ namespace LectureAttendance.Pages.Control.Add
                 newInstructor.Password = BCrypt.Net.BCrypt.HashPassword(Password);
                 newInstructor.DateOfBirth = BirthDate;
                 newInstructor.Gender = Gender[0];
-                newInstructor.Department = DepartInstructor;
-                db.Instructors.Add(newInstructor);
-                db.SaveChanges();
-                successMessage = "The instructor added successfully!";
+                newInstructor.Department = Depart;
+
+                try
+                {
+                    db.Instructors.Add(newInstructor);
+                    db.SaveChanges();
+                } catch { errorMessage = "The Instructor ID Exists! Enter Another ID!"; }
+
+                successMessage = "The Instructor Added Successfully!";
+
                 Id = "";
                 Name = "";
                 Email = "";
                 Password = "";
-                DepartInstructor = "";
+                Depart = "";
                 Gender = "";
                 Phone = "";
                 BirthDate = "";
                 errorMessage = "";
+
                 ModelState.Clear();
             }
             else
             {
-                errorMessage = "There is something wrong.";
-                return;
+                errorMessage = "Error!";
             }
         }
 

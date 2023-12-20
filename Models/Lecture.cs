@@ -7,15 +7,21 @@ namespace LectureAttendance.Models
     {
         [Required]
         public string CourseId { get; set; }
+
         [Required]
         public string InstructorId { get; set; }
+
         [Required]
         public string Location { get; set; }
+
         [Required]
         public string DateOfLecture { get; set; }
+
         [Required]
         public string StartTime { get; set; }
+
         [Required]
+        [DataType(DataType.Time)]
         public string EndTime{ get; set; }
 
 

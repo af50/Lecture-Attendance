@@ -17,7 +17,7 @@ namespace LectureAttendance.Models
                 .HasKey(e => new { e.StudentId, e.InstructorId });
 
             modelBuilder.Entity<Lecture>()
-                .HasKey(e => new { e.CourseId, e.InstructorId, e.DateOfLecture });
+                .HasKey(e => new { e.Location, e.DateOfLecture, e.StartTime });
         }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Student> Students {  get; set; }

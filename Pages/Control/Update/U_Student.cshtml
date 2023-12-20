@@ -1,0 +1,155 @@
+﻿@page
+@model LectureAttendance.Pages.Control.Update.U_StudentModel
+@{
+}
+
+<head>
+    <title>Update</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-5.3.2-dist/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Control/Add/Student">Add</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link">Update</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Control/Delete/D_Student">Delete</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+    <div class="a">
+        <div class="container-fluid">
+            <form action="" id="loginForm" method="post">
+                <h1 style="margin-bottom:5%;">Update A Student</h1>
+
+                <br />
+                @if(Model.errorMessage.Length > 0)
+                {
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>@Model.errorMessage</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                else if(Model.successMessage.Length > 0)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>@Model.successMessage</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                <label>Student ID</label>
+                <br />
+            <input type="text" id="student1" asp-for="Id" class="form-control">
+            @* <span asp-validation-for="Id" class="text-danger"></span> *@
+            <br />
+
+                @if (Model.flag)
+                {
+                            <style>.DEV
+                                {
+                                    display: inline;
+                                }</style>
+                }
+                else
+                {
+                            <style>.DEV
+                                {
+                                    display: none;
+                                }</style>
+                }
+
+             
+
+
+            <div class="DEV">
+                <input type="text" id="student1" class="form-control" asp-for="Name" value="@Model.Name" placeholder="Name">
+                @* <span asp-validation-for="Name" class="text-danger"></span> *@
+                <br />
+                <fieldset id="student1">
+                    <label>Level</label>
+                    <select asp-for="Level" value="@Model.Level">
+                        <option value="1" selected="@(Model.Level == '1' ? true:false)">1</option>
+                        <option value="2" selected="@(Model.Level == '2' ? true:false)">2</option>
+                        <option value="3" selected="@(Model.Level == '3' ? true:false)">3</option>
+                        <option value="4" selected="@(Model.Level == '4' ? true:false)">4</option>
+                    </select>
+                </fieldset>
+                <br />
+                <input type="text" email="user1" value="@Model.Email" asp-for="Email" class="form-control" placeholder="Email">
+                @* <span asp-validation-for="Email" class="text-danger"></span> *@
+                <br />
+           @*  <input type="password" value="@Model.Password" password="pass1" asp-for="Password" class="form-control" placeholder="Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <br /> *@
+            <input type="text" value="@Model.Phone" asp-for="Phone" class="form-control" placeholder="Phone">
+                <br />
+                <label>BirthDate</label>
+            <input type="date" value="@Model.BirthDate" asp-for="BirthDate" class="form-control">
+                <br />
+
+               <label>
+                    <input type="radio" name="userType" asp-for="Gender" value="M" checked="@(Model.Gender=='M' ? true:false)" />
+                    Male
+                </label>
+
+                <label>
+                    <input type="radio" name="userType" asp-for="Gender" value="F" checked="@(Model.Gender=='F' ? true:false)" />
+                    Female
+                </label>
+
+          </div>          
+                
+               
+                
+
+                   
+                    
+                <br>
+
+                 @if (Model.flag==false){
+                         
+
+                    <input type="hidden" asp-for="parameter1" value="ID"/>
+                    <button type="submit" class="btn" style="  display: inline-block;
+                            background-color: #172432;
+                            border: none;
+                            color: #ddd;
+                            padding: 10px 20px;
+                            border-radius: 5px;">
+                        Search
+                    </button>
+                }
+                else
+                { 
+                    <button type="submit" class="btn" style="  display: inline-block;
+                            background-color: #172432;
+                            border: none;
+                            color: #ddd;
+                            padding: 10px 20px;
+                            border-radius: 5px;">
+                        Update
+                    </button>
+                }
+
+                
+            </form>
+        </div>
+    </div>
+
+</body>

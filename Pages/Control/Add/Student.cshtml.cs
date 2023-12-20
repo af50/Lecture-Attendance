@@ -6,39 +6,48 @@ namespace LectureAttendance.Pages.Control.Add
 {
     public class StudentModel : PageModel
     {
+        PContext db = new PContext();
+
+
         [BindProperty]
-        [Required(ErrorMessage = "This field is required")]
+        [Required(ErrorMessage = "This Field Is Required")]
         public string Id { get; set; }
+
         [BindProperty]
-        [Required(ErrorMessage = "This field is required")]
+        [Required(ErrorMessage = "This Field Is Required")]
         public string Name { get; set; }
+
         [BindProperty]
-        [Required(ErrorMessage = "This field is required")]
+        [Required(ErrorMessage = "This Field Is Required")]
         public string Level { get; set; }
+
         [BindProperty]
-        [Required(ErrorMessage = "This field is required")]
+        [Required(ErrorMessage = "This Field Is Required")]
         public string Email { get; set; }
+
         [BindProperty]
-        [Required(ErrorMessage = "This field is required")]
+        [Required(ErrorMessage = "This Field Is Required")]
         public string Password { get; set; }
+
         [BindProperty]
         public string Phone { get; set; }
+
         [BindProperty]
         public string BirthDate { get; set; }
+
         [BindProperty]
         [Required]
         public string Gender { get; set; }
+
+
         public string errorMessage = "";
         public string successMessage = "";
-        public void OnGet()
-        {
 
-        }
+
         public void OnPost()
         {
             if (ModelState.IsValid)
             {
-                PContext db = new PContext();
                 Student newStudent = new Student();
                 newStudent.StudentId = Id;
                 newStudent.Name = Name;
@@ -50,7 +59,8 @@ namespace LectureAttendance.Pages.Control.Add
                 newStudent.Level = Level[0];
                 db.Students.Add(newStudent);
                 db.SaveChanges();
-                successMessage = "The course added successfully!";
+                successMessage = "The Student Added Successfully!";
+
                 Id = "";
                 Name = "";
                 Email = "";

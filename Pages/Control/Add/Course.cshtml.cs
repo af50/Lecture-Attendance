@@ -9,37 +9,43 @@ namespace LectureAttendance.Pages.Control.Add
     {
 
 
-        [Required(ErrorMessage = "This field is required")]
+        [Required(ErrorMessage = "This Field Is Required")]
         [BindProperty]
-        public string Id { get; set; }
-        [Required(ErrorMessage = "This field is required")]
+        public string CourseID { get; set; }
+        [Required(ErrorMessage = "This Field Is Required")]
         [BindProperty]
-        public string Name { get; set; }
+        public string CourseName { get; set; }
 
 
         public string errorMessage = "";
         public string successMessage = "";
+
+
         public void OnPost()
         {
             if (ModelState.IsValid)
             {
                 PContext db = new PContext();
                 Course course = new Course();
-                course.CourseId = Id;
-                course.Name = Name;
-                db.Add(course);
-                db.SaveChanges();
-                successMessage = "The student added successfully!";
-                Id = "";
-                Name = "";
+                course.CourseId = CourseID;
+                course.Name = CourseName;
+                
+                try
+                {
+                    db.Add(course);
+                    db.SaveChanges();
+                } catch { errorMessage = "The Course Code Exists! Enter Another Code!"; }
+                
+                successMessage = "The Course Added Successfully!";
+                CourseID = "";
+                CourseName = "";
                 ModelState.Clear();
             }
             else
             {
-                errorMessage = "There is something wrong.";
-                return;
+                errorMessage = "Error!";
             }
         }
-        } 
-    }
+    } 
+}
 

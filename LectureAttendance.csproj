@@ -17,9 +17,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Control\Delete\" />
-    <Folder Include="Pages\Control\Update\" />
-  </ItemGroup>
-
 </Project>

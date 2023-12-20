@@ -5,7 +5,7 @@
 
 
 <head>
-    <title>Sign up</title>
+    <title>Add</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bootstrap-5.3.2-dist/bootstrap-5.3.2-dist/css/bootstrap.min.css">
@@ -21,13 +21,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Add/Student">Add</a>
+                            <a class="nav-link">Add</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" asp-page="#">Update</a>
+                            <a class="nav-link" asp-page="/Control/Update/U_Lecture">Update</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="#">Delete</a>
+                            <a class="nav-link" asp-page="/Control/Delete/D_Lecture">Delete</a>
                         </li>
                     </ul>
                 </div>
@@ -39,7 +39,7 @@
         <div class="container-fluid">
             <form action="" id="loginForm" method="post">
                 <br />
-                <h1 style="margin-bottom:5%;">Add a new lecture</h1>
+                <h1 style="margin-bottom:5%;">Add A New Lecture</h1>
 
                 @if (Model.errorMessage.Length > 0)
                 {
@@ -61,15 +61,15 @@
                 <br />
                 <fieldset id="">
                     <label>Choose the lecture course from here:</label>
-                    <select asp-for="CName">
-                        <option>Choose</option>
+                    <select asp-for="CourseName">
+                        @*<option>Choose</option>*@
                         @foreach (var course in Model.CoursesList())
                         {
                                 <option value="@course">@course</option>
                         }
                     </select>
                 </fieldset>
-                <span asp-validation-for="CName" class="text-danger"></span>
+                <span asp-validation-for="CourseName" class="text-danger"></span>
                 <br />
 
 
@@ -78,15 +78,15 @@
                 <br />
                 <fieldset id="">
                     <label>Choose the lecture instructor from here:</label>
-                    <select asp-for="IName">
-                      <option>Choose</option>
+                    <select asp-for="InstructorName">
+                      @* <option>Choose</option> *@
                         @foreach(var instructor in Model.InstructorsList())
                         {
                             <option value="@instructor">@instructor</option>
                         }
                     </select>
                 </fieldset>
-                <span asp-validation-for="IName" class="text-danger"></span>
+                <span asp-validation-for="InstructorName" class="text-danger"></span>
                 
                 
                  <br />
