@@ -1,8 +1,8 @@
 ﻿@page
 @model LectureAttendance.Pages.Control.Delete.D_CourseModel
 @{
+    ViewBag.UserType = HttpContext.Session.GetString("Type");
 }
-
 <head>
         <title>Delete</title>
         <meta charset="utf-8">

@@ -22,21 +22,33 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-page="/Index">Schedule</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Control
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" asp-page="/Control/Add/Student">Student</a></li>
-                                <li><a class="dropdown-item" asp-page="/Control/Add/Lecture">Lecture</a></li>
-                                <li><a class="dropdown-item" asp-page="/Control/Add/Course">Course</a></li>
-                                <li><a class="dropdown-item" asp-page="/Control/Add/Instructor">Instructor</a></li>
-                                
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-page="/Login/Index">Sign in</a>
-                        </li>
+                        @if (ViewBag.UserType == "Admin")
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Control
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li><a class="dropdown-item" asp-page="/Control/Add/Student">Student</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Control/Add/Lecture">Lecture</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Control/Add/Course">Course</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Control/Add/Instructor">Instructor</a></li>
+
+                                </ul>
+                            </li>
+                            
+                        @if (ViewBag.UserType == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Login/Index">Sign in</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Login/logout">Log out</a>
+                            </li>
+                        }
                     </ul> 
                 </div>
             </div>

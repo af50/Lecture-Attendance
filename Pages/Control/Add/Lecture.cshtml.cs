@@ -57,8 +57,27 @@ namespace LectureAttendance.Pages.Control.Add
             return InstructorsList;
         }
 
+		public IActionResult OnGet()
+		{
+			if (HttpContext.Session.GetString("Type") == null)
+			{
+				return RedirectToPage("/Login/Index");
+			}
+			if (HttpContext.Session.GetString("Type") == "Student")
+			{
+				return RedirectToPage("/Index");
+			}
+			else if (HttpContext.Session.GetString("Type") == "Instructor")
+			{
+				return RedirectToPage("/Index");
+			}
+			else
+			{
+				return Page();
+			}
+		}
 
-        public void OnPost()
+		public void OnPost()
         {
 
             if (ModelState.IsValid)

@@ -1,6 +1,7 @@
 ﻿@page
 @model LectureAttendance.Pages.Control.Delete.StudentModel
 @{
+    ViewBag.UserType = HttpContext.Session.GetString("Type");
 }
 
 <head>

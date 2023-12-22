@@ -1,5 +1,8 @@
 ﻿@page
 @model LectureAttendance.Pages.Login.IndexModel
+@{
+    ViewBag.UserType = HttpContext.Session.GetString("Type");
+}
 <div class="a" style="height:600px">
     <div class="container-fluid">
         <form action="" id="loginForm" method="post">
