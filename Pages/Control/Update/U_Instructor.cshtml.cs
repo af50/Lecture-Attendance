@@ -5,14 +5,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LectureAttendance.Pages.Control.Update
 {
-    public class U_Student : PageModel
+    public class U_Instructor : PageModel
     {
         PContext db = new PContext();
 
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
-        public string Id { get; set; }
+        public string InstructorId { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
@@ -20,7 +20,7 @@ namespace LectureAttendance.Pages.Control.Update
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
-        public char Level { get; set; }
+        public string Department { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
@@ -56,55 +56,55 @@ namespace LectureAttendance.Pages.Control.Update
         {
             if (Action == "Get")
             {
-                Student std = new Student();
-                std = db.Students.Find(Id);
+                Instructor ins = new();
+                ins = db.Instructors.Find(InstructorId);
 
-                if (std != null)
+                if (ins != null)
                 {
-                    Name = std.Name;
-                    Email = std.Email;
-                    Phone = std.Phone;
-                    Gender = std.Gender;
-                    Level = std.Level;
-                    BirthDate = std.DateOfBirth;
+                    Name = ins.Name;
+                    Email = ins.Email;
+                    Phone = ins.Phone;
+                    Gender = ins.Gender;
+                    Department = ins.Department;
+                    BirthDate = ins.DateOfBirth;
                     Password = "";
 
                     flag = true;
                 }
                 else
                 {
-                    errorMessage = "Student Not Found!";
+                    errorMessage = "Instructor Not Found!";
                 }
             }
-            else if (Action  == "Update")
+            else if (Action == "Update")
             {
                 if (ModelState.IsValid)
                 {
-                    Student UpdatedStudent = new Student();
+                    Instructor UpdatedInstructor = new();
 
-                    UpdatedStudent.StudentId = Id;
-                    UpdatedStudent.Name = Name;
-                    UpdatedStudent.Email = Email;
-                    UpdatedStudent.Gender = Gender;
-                    UpdatedStudent.Phone = Phone;
-                    UpdatedStudent.Password = BCrypt.Net.BCrypt.HashPassword(Password);
-                    UpdatedStudent.DateOfBirth = BirthDate;
-                    UpdatedStudent.Level = Level;
+                    UpdatedInstructor.InstructorId = InstructorId;
+                    UpdatedInstructor.Name = Name;
+                    UpdatedInstructor.Email = Email;
+                    UpdatedInstructor.Gender = Gender;
+                    UpdatedInstructor.Phone = Phone;
+                    UpdatedInstructor.Password = BCrypt.Net.BCrypt.HashPassword(Password);
+                    UpdatedInstructor.DateOfBirth = BirthDate;
+                    UpdatedInstructor.Department = Department;
 
                     try
                     {
-                        db.Students.Update(UpdatedStudent);
+                        db.Instructors.Update(UpdatedInstructor);
                         db.SaveChanges();
                     }
                     catch { errorMessage = "The Data Has Never Changed!"; }
 
-                    successMessage = "The Student Updated Successfully!";
+                    successMessage = "The Instructor Updated Successfully!";
 
-                    Id = "";
+                    InstructorId = "";
                     Name = "";
                     Email = "";
                     Password = "";
-                    Level = '\0';
+                    Department = "";
                     Gender = '\0';
                     Phone = "";
                     BirthDate = "";

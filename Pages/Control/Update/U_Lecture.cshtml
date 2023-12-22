@@ -1,7 +1,6 @@
 ﻿@page
-@model LectureAttendance.Pages.Control.Update.U_Student
+@model LectureAttendance.Pages.Control.Update.U_Lecture
 @{
-    ViewBag.UserType = HttpContext.Session.GetString("Type");
 }
 
 <head>
@@ -12,7 +11,7 @@
 </head>
 
 <body>
-<header style="height:100px">
+<header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,12 +33,12 @@
         </div>
     </nav>
 </header>
-    <div class="a" style="height:600px">
+    <div class="a">
         <div class="container-fluid">
             <form action="" id="loginForm" method="post">
                 <h1 style="margin-bottom:5%;">Update A Student</h1>
 
-                
+                <br />
                 @if(Model.errorMessage.Length > 0)
                 {
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -57,17 +56,10 @@
 
 
                 <label>Student ID</label>
-<<<<<<< HEAD
-                <input type="text" id="student1" asp-for="Id" class="form-control" readonly="@(Model.flag ? true:false)">
-                @* <span asp-validation-for="Id" class="text-danger"></span> *@
+                <input type="text" id="student1" asp-for="Id" class="form-control">
+                <span asp-validation-for="Id" class="text-danger"></span>
                 <br />
 
-=======
-                
-            <input type="text" id="student1" asp-for="Id" class="form-control">
-            @* <span asp-validation-for="Id" class="text-danger"></span> *@
-            <br />
->>>>>>> 4708cfc6db8fafed449d341982d104bd7660e1ce
 
                 @if (Model.flag)
                 {
@@ -90,13 +82,10 @@
 
 
             <div class="DEV">
-
-                <label>Name</label>
-                <input type="text" id="student1" class="form-control" asp-for="Name" value="@Model.Name">
+                <input type="text" id="student1" class="form-control" asp-for="Name" value="@Model.Name" placeholder="Name">
                 <span asp-validation-for="Name" class="text-danger"></span>
                 <br />
-
-                <fieldset>
+                <fieldset id="student1">
                     <label>Level</label>
                     <select asp-for="Level" value="@Model.Level">
                         <option value="1" selected="@(Model.Level == '1' ? true:false)">1</option>
@@ -108,8 +97,7 @@
                 <span asp-validation-for="Level" class="text-danger"></span>
                 <br />
 
-                <label>Email</label>
-                <input type="text" value="@Model.Email" asp-for="Email" class="form-control">
+                <input type="text" email="user1" value="@Model.Email" asp-for="Email" class="form-control">
                 <span asp-validation-for="Email" class="text-danger"></span>
                 <br />
 
@@ -118,15 +106,13 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
                 <br />
 
-                <label>Phone</label>
-                <input type="text" value="@Model.Phone" asp-for="Phone" class="form-control">
-                <span asp-validation-for="Phone" class="text-danger"></span>
+                <input type="text" value="@Model.Phone" asp-for="Phone" class="form-control" placeholder="Phone">
                 <br />
+                <span asp-validation-for="Phone" class="text-danger"></span>
 
                 <label>BirthDate</label>
                 <input type="date" value="@Model.BirthDate" asp-for="BirthDate" class="form-control">
                 <span asp-validation-for="BirthDate" class="text-danger"></span>
-                <br />
                 <br />
 
                <label>
@@ -138,7 +124,6 @@
                     <input type="radio" name="gender" asp-for="Gender" value="F" checked="@(Model.Gender=='F' ? true:false)" />
                     Female
                 </label>
-                <br />
                 <span asp-validation-for="Gender" class="text-danger"></span>
                 <br />
                 <br />
@@ -159,7 +144,8 @@
                             border: none;
                             color: #ddd;
                             padding: 10px 20px;
-                            border-radius: 5px;">
+                            border-radius: 5px;"
+                            @* onclick="Model.D()" *@>
                         Search
                     </button>
                 }

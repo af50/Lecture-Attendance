@@ -1,7 +1,6 @@
 ﻿@page
-@model LectureAttendance.Pages.Control.Update.U_Student
+@model LectureAttendance.Pages.Control.Update.U_Instructor
 @{
-    ViewBag.UserType = HttpContext.Session.GetString("Type");
 }
 
 <head>
@@ -12,7 +11,7 @@
 </head>
 
 <body>
-<header style="height:100px">
+<header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,59 +33,52 @@
         </div>
     </nav>
 </header>
-    <div class="a" style="height:600px">
+    <div class="a">
         <div class="container-fluid">
             <form action="" id="loginForm" method="post">
-                <h1 style="margin-bottom:5%;">Update A Student</h1>
+                <h1 style="margin-bottom:5%;">Update An Instructor</h1>
 
-                
-                @if(Model.errorMessage.Length > 0)
+                <br />
+                @if (Model.errorMessage.Length > 0)
                 {
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>@Model.errorMessage</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>@Model.errorMessage</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                 }
-                else if(Model.successMessage.Length > 0)
+                else if (Model.successMessage.Length > 0)
                 {
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>@Model.successMessage</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>@Model.successMessage</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                 }
 
 
-                <label>Student ID</label>
-<<<<<<< HEAD
-                <input type="text" id="student1" asp-for="Id" class="form-control" readonly="@(Model.flag ? true:false)">
+                <label>Instructor ID</label>
+                <input type="text" id="student1" asp-for="InstructorId" class="form-control" readonly="@(Model.flag ? true:false)">
                 @* <span asp-validation-for="Id" class="text-danger"></span> *@
                 <br />
 
-=======
-                
-            <input type="text" id="student1" asp-for="Id" class="form-control">
-            @* <span asp-validation-for="Id" class="text-danger"></span> *@
-            <br />
->>>>>>> 4708cfc6db8fafed449d341982d104bd7660e1ce
 
                 @if (Model.flag)
                 {
-                            <style>.DEV
-                                {
-                                    display: inline;
-                                }
-                            </style>
+                                <style>.DEV
+                                    {
+                                        display: inline;
+                                    }
+                                </style>
                 }
                 else
                 {
-                            <style>.DEV
-                                {
-                                    display: none;
-                                }
-                            </style>
+                                <style>.DEV
+                                    {
+                                        display: none;
+                                    }
+                                </style>
                 }
 
-             
+
 
 
             <div class="DEV">
@@ -95,21 +87,13 @@
                 <input type="text" id="student1" class="form-control" asp-for="Name" value="@Model.Name">
                 <span asp-validation-for="Name" class="text-danger"></span>
                 <br />
-
-                <fieldset>
-                    <label>Level</label>
-                    <select asp-for="Level" value="@Model.Level">
-                        <option value="1" selected="@(Model.Level == '1' ? true:false)">1</option>
-                        <option value="2" selected="@(Model.Level == '2' ? true:false)">2</option>
-                        <option value="3" selected="@(Model.Level == '3' ? true:false)">3</option>
-                        <option value="4" selected="@(Model.Level == '4' ? true:false)">4</option>
-                    </select>
-                </fieldset>
-                <span asp-validation-for="Level" class="text-danger"></span>
+                
+                <label>Department</label>
+                <input type="text" email="user1" value="@Model.Department" asp-for="Department" class="form-control">
+                <span asp-validation-for="Department" class="text-danger"></span>
                 <br />
 
-                <label>Email</label>
-                <input type="text" value="@Model.Email" asp-for="Email" class="form-control">
+                <input type="text" email="user1" value="@Model.Email" asp-for="Email" class="form-control">
                 <span asp-validation-for="Email" class="text-danger"></span>
                 <br />
 
@@ -143,40 +127,41 @@
                 <br />
                 <br />
           </div>          
-                
-               
-                
 
-                   
-                    
 
-                 @if (Model.flag == false){
-                         
 
-                    <input type="hidden" asp-for="Action" value="Get"/>
-                    <button type="submit" class="btn" style="  display: inline-block;
+
+
+
+
+                @if (Model.flag == false)
+                {
+
+
+                        <input type="hidden" asp-for="Action" value="Get"/>
+                        <button type="submit" class="btn" style="  display: inline-block;
                             background-color: #172432;
                             border: none;
                             color: #ddd;
                             padding: 10px 20px;
                             border-radius: 5px;">
-                        Search
-                    </button>
+                            Search
+                        </button>
                 }
                 else
                 { 
-                    <input type="hidden" asp-for="Action" value="Update"/>
-                    <button type="submit" class="btn" style="  display: inline-block;
+                        <input type="hidden" asp-for="Action" value="Update"/>
+                        <button type="submit" class="btn" style="  display: inline-block;
                             background-color: #172432;
                             border: none;
                             color: #ddd;
                             padding: 10px 20px;
                             border-radius: 5px;">
-                        Update
-                    </button>
+                            Update
+                        </button>
                 }
 
-                
+
             </form>
         </div>
     </div>
