@@ -36,7 +36,7 @@
 </header>
 
 
-<div class="a">
+   <div class="a" style="height:600px">
     <div class="container-fluid">
 
         <form action="" id="loginForm" method="post">
@@ -59,26 +59,20 @@
             }
 
             <label>Course Code</label>
-            <br />
             <input type="text" class="form-control" asp-for="CourseID" placeholder="Enter Course Code Here">
             <span asp-validation-for="CourseID" class="text-danger"></span>
 
-            <br />
-
             <label>Course Name</label>
-            <br />
             <input type="text" class="form-control" asp-for="CourseName" placeholder="Enter Course Name Here">
             <span asp-validation-for="CourseName" class="text-danger"></span>
            
-            <br />
-            <br />
             <button type="submit" class="btn" style="  display: inline-block;
                     background-color: #172432;
                     border: none;
                     color: #ddd;
                     padding: 10px 20px;
                     border-radius: 5px;">
-                Add
+                    Add
             </button>
         </form>
     </div>
