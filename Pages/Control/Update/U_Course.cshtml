@@ -1,5 +1,5 @@
 ﻿@page
-@model LectureAttendance.Pages.Control.Update.U_Student
+@model LectureAttendance.Pages.Control.Update.U_Course
 @{
 }
 
@@ -36,7 +36,7 @@
     <div class="a">
         <div class="container-fluid">
             <form action="" id="loginForm" method="post">
-                <h1 style="margin-bottom:5%;">Update A Student</h1>
+                <h1 style="margin-bottom:5%;">Update A Course</h1>
 
                 <br />
                 @if(Model.errorMessage.Length > 0)
@@ -55,9 +55,9 @@
                 }
 
 
-                <label>Student ID</label>
-                <input type="text" id="student1" asp-for="Id" class="form-control" readonly="@(Model.flag ? true:false)">
-                @* <span asp-validation-for="Id" class="text-danger"></span> *@
+                <label>Course Code</label>
+                <input type="text" id="student1" asp-for="CourseCode" class="form-control" readonly="@(Model.flag ? true:false)">
+                <span asp-validation-for="CourseCode" class="text-danger"></span>
                 <br />
 
 
@@ -82,56 +82,8 @@
 
 
             <div class="DEV">
-
-                <label>Name</label>
-                <input type="text" id="student1" class="form-control" asp-for="Name" value="@Model.Name">
-                <span asp-validation-for="Name" class="text-danger"></span>
-                <br />
-
-                <fieldset>
-                    <label>Level</label>
-                    <select asp-for="Level" value="@Model.Level">
-                        <option value="1" selected="@(Model.Level == '1' ? true:false)">1</option>
-                        <option value="2" selected="@(Model.Level == '2' ? true:false)">2</option>
-                        <option value="3" selected="@(Model.Level == '3' ? true:false)">3</option>
-                        <option value="4" selected="@(Model.Level == '4' ? true:false)">4</option>
-                    </select>
-                </fieldset>
-                <span asp-validation-for="Level" class="text-danger"></span>
-                <br />
-
-                <label>Email</label>
-                <input type="text" value="@Model.Email" asp-for="Email" class="form-control">
-                <span asp-validation-for="Email" class="text-danger"></span>
-                <br />
-
-                <label>Password</label>
-                <input type="password" value="@Model.Password" asp-for="Password" class="form-control">
-                <span asp-validation-for="Password" class="text-danger"></span>
-                <br />
-
-                <label>Phone</label>
-                <input type="text" value="@Model.Phone" asp-for="Phone" class="form-control">
-                <span asp-validation-for="Phone" class="text-danger"></span>
-                <br />
-
-                <label>BirthDate</label>
-                <input type="date" value="@Model.BirthDate" asp-for="BirthDate" class="form-control">
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
-                <br />
-                <br />
-
-               <label>
-                    <input type="radio" name="gender" asp-for="Gender" value="M" checked="@(Model.Gender=='M' ? true:false)" />
-                    Male
-                </label>
-
-                <label>
-                    <input type="radio" name="gender" asp-for="Gender" value="F" checked="@(Model.Gender=='F' ? true:false)" />
-                    Female
-                </label>
-                <br />
-                <span asp-validation-for="Gender" class="text-danger"></span>
+                <input type="text" id="student1" class="form-control" asp-for="CourseName" value="@Model.CourseName">
+                <span asp-validation-for="CourseName" class="text-danger"></span>
                 <br />
                 <br />
           </div>          

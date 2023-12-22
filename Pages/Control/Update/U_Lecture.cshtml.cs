@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LectureAttendance.Pages.Control.Update
 {
-    public class U_Student : PageModel
+    public class U_Lecture : PageModel
     {
         PContext db = new PContext();
 
@@ -49,11 +49,16 @@ namespace LectureAttendance.Pages.Control.Update
         public bool flag = false;
 
         [BindProperty]
-        public string Action { get; set; }
+        public string Action { get; set;  }
 
+        //public void D()
+        //{
+        //    errorMessage = ID;
+        //}
 
         public void OnPost()
         {
+            errorMessage = Action;
             if (Action == "Get")
             {
                 Student std = new Student();
@@ -61,6 +66,7 @@ namespace LectureAttendance.Pages.Control.Update
 
                 if (std != null)
                 {
+
                     Name = std.Name;
                     Email = std.Email;
                     Phone = std.Phone;
@@ -70,6 +76,7 @@ namespace LectureAttendance.Pages.Control.Update
                     Password = "";
 
                     flag = true;
+
                 }
                 else
                 {
@@ -80,6 +87,8 @@ namespace LectureAttendance.Pages.Control.Update
             {
                 if (ModelState.IsValid)
                 {
+                    errorMessage = "Petetetetetetetete";
+
                     Student UpdatedStudent = new Student();
 
                     UpdatedStudent.StudentId = Id;
@@ -94,7 +103,7 @@ namespace LectureAttendance.Pages.Control.Update
                     try
                     {
                         db.Students.Update(UpdatedStudent);
-                        db.SaveChanges();
+                    db.SaveChanges();
                     }
                     catch { errorMessage = "The Data Has Never Changed!"; }
 
@@ -108,9 +117,9 @@ namespace LectureAttendance.Pages.Control.Update
                     Gender = '\0';
                     Phone = "";
                     BirthDate = "";
+                    errorMessage = "";
 
                     ModelState.Clear();
-
                 }
                 else
                 {
