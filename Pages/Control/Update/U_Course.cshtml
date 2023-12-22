@@ -1,6 +1,7 @@
 ﻿@page
 @model LectureAttendance.Pages.Control.Update.U_Course
 @{
+    ViewBag.UserType = HttpContext.Session.GetString("Type");
 }
 
 <head>
