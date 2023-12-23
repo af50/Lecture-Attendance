@@ -5,7 +5,7 @@
 namespace LectureAttendance.Migrations
 {
     /// <inheritdoc />
-    public partial class @new : Migration
+    public partial class enrollment : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -183,22 +183,20 @@ namespace LectureAttendance.Migrations
                 columns: table => new
                 {
                     StudentID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    DateOfLecture = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StartTime = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LectureAttendanceTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LecturesLocation = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    LecturesDateOfLecture = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    LecturesStartTime = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    LecturesLocation = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LecturesDateOfLecture = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LecturesStartTime = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LectureAttendanceTime = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attendances", x => new { x.StudentID, x.Location, x.DateOfLecture, x.StartTime });
+                    table.PrimaryKey("PK_Attendances", x => new { x.StudentID, x.LecturesLocation, x.LecturesDateOfLecture, x.LecturesStartTime });
                     table.ForeignKey(
                         name: "FK_Attendances_Lectures_LecturesLocation_LecturesDateOfLecture_LecturesStartTime",
                         columns: x => new { x.LecturesLocation, x.LecturesDateOfLecture, x.LecturesStartTime },
                         principalTable: "Lectures",
-                        principalColumns: new[] { "Location", "DateOfLecture", "StartTime" });
+                        principalColumns: new[] { "Location", "DateOfLecture", "StartTime" },
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Attendances_Students_StudentID",
                         column: x => x.StudentID,

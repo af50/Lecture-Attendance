@@ -35,17 +35,17 @@ namespace LectureAttendance.Pages.Login
             else if(!Admin.IsNullOrEmpty() && Password != null && BCrypt.Net.BCrypt.Verify(Password, Admin.FirstOrDefault().Password))
             {
 				HttpContext.Session.SetString("Type", "Admin");
-				return RedirectToPage("/Index");
+				return RedirectToPage("/Control/Add/Student");
 			}
 			else if (!Instructor.IsNullOrEmpty() && Password != null && BCrypt.Net.BCrypt.Verify(Password, Instructor.FirstOrDefault().Password))
 			{
 				HttpContext.Session.SetString("Type", "Instructor");
-				return RedirectToPage("/Index");
-			}
+                return RedirectToPage("/Login/Index");
+            }
 			else
             {
                 ErrorMessage = "Invalid Email or Password!";
-                return Page();
+                return RedirectToPage("/Index");
             }
         }
     }

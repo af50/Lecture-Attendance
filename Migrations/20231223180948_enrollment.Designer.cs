@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LectureAttendance.Migrations
 {
     [DbContext(typeof(PContext))]
-    [Migration("20231223140530_new2")]
-    partial class new2
+    [Migration("20231223180948_enrollment")]
+    partial class enrollment
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,29 +76,20 @@ namespace LectureAttendance.Migrations
                     b.Property<string>("StudentID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("LectureLocation")
+                    b.Property<string>("LecturesLocation")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("LectureDate")
+                    b.Property<string>("LecturesDateOfLecture")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("LectureStartTime")
+                    b.Property<string>("LecturesStartTime")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LectureAttendanceTime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LecturesDateOfLecture")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LecturesLocation")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LecturesStartTime")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("StudentID", "LectureLocation", "LectureDate", "LectureStartTime");
+                    b.HasKey("StudentID", "LecturesLocation", "LecturesDateOfLecture", "LecturesStartTime");
 
                     b.HasIndex("LecturesLocation", "LecturesDateOfLecture", "LecturesStartTime");
 
@@ -289,7 +280,9 @@ namespace LectureAttendance.Migrations
 
                     b.HasOne("LectureAttendance.Models.Lecture", "Lectures")
                         .WithMany()
-                        .HasForeignKey("LecturesLocation", "LecturesDateOfLecture", "LecturesStartTime");
+                        .HasForeignKey("LecturesLocation", "LecturesDateOfLecture", "LecturesStartTime")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Lectures");
 

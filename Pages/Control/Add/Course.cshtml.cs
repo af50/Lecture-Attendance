@@ -56,7 +56,7 @@ namespace LectureAttendance.Pages.Control.Add
                 
                 try
                 {
-                    db.Add(course);
+                    db.Courses.Add(course);
                     db.SaveChanges();
                     successMessage = "The Course Added Successfully!";
                 }

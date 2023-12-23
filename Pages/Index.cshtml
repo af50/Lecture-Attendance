@@ -6,22 +6,37 @@
 }
 
 <head>
-    <title>Sign in</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bootstrap-5.3.2-dist/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/table.css" />
 </head>
 
 
-    <body>
-   
-        <h2 style="text-align: center; margin-top: 300px;">There is no lectures available,you have to register</h2>
-
-    <div style="text-align: center;  margin-bottom:1000px">
+<body>
+    
+    <table>
         
-        <a asp-page="login/Index" >sign in</a>
-        <p style="display:inline">or</p>
-        <a asp-page="sign">sign up</a>
-    </div>
+        <tr>
+            <th>Location</th>
+            <th>StartTime</th>
+            <th>EndTime</th>
+            <th>InstructorId</th>
+            <th>CourseId</th>
+            <th>DateOfLecture</th>
+        </tr>
+        @foreach (var lecture in Model.LecturesList())
+        {
+                <tr>
+                    <td>@lecture.Location</td>
+                    <td>@lecture.StartTime</td>
+                    <td>@lecture.EndTime</td>
+                    <td>@lecture.InstructorId</td>
+                    <td>@lecture.CourseId</td>
+                    <td>@lecture.DateOfLecture</td>
+                </tr>
+        }
+  
+  </table>
 
-    </body>
+</body>
