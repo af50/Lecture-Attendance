@@ -75,9 +75,13 @@ namespace LectureAttendance.Pages.Control.Add
                 newStudent.Password = BCrypt.Net.BCrypt.HashPassword(Password);
                 newStudent.DateOfBirth = BirthDate;
                 newStudent.Level = Level;
-                db.Students.Add(newStudent);
-                db.SaveChanges();
-                successMessage = "The Student Added Successfully!";
+
+                try
+                {
+                    db.Students.Add(newStudent);
+                    db.SaveChanges();
+                    successMessage = "The Student Added Successfully!";
+                } catch { errorMessage = "The Student ID Exists! Enter Another ID!"; }
 
                 Id = "";
                 Name = "";
@@ -92,7 +96,7 @@ namespace LectureAttendance.Pages.Control.Add
             }
             else
             {
-                errorMessage = "There is something wrong.";
+                errorMessage = "Error! Check One Or More Inputs!";
                 return;
             }
         }

@@ -10,7 +10,10 @@ namespace LectureAttendance.Models
         public string CourseId { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string CourseName { get; set; }
+
+        [Required]
+        public char RelatedLevel { get; set; }
 
 
         public virtual ICollection<Instructor> Instructors { get; set; }

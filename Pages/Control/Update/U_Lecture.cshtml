@@ -21,13 +21,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" asp-page="/Control/Add/Student">Add</a>
+                        <a class="nav-link" asp-page="/Control/Add/Lecture">Add</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link">Update</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-page="/Control/Delete/D_Student">Delete</a>
+                        <a class="nav-link" asp-page="/Control/Delete/D_Lecture">Delete</a>
                     </li>
                 </ul>
             </div>
@@ -37,7 +37,7 @@
     <div class="a">
         <div class="container-fluid">
             <form action="" id="loginForm" method="post">
-                <h1 style="margin-bottom:5%;">Update A Student</h1>
+                <h1 style="margin-bottom:5%;">Update A Lecture</h1>
 
                 <br />
                 @if(Model.errorMessage.Length > 0)
@@ -56,10 +56,32 @@
                 }
 
 
-                <label>Student ID</label>
-                <input type="text" id="student1" asp-for="Id" class="form-control">
-                <span asp-validation-for="Id" class="text-danger"></span>
+                <label>Lecture Date</label>
+                <input type="date" asp-for="LectureDate" class="form-control" readonly="@(Model.flag ? true:false)" placeholder="Enter The Lecture Date Here">
+                <span asp-validation-for="LectureDate" class="text-danger"></span>
                 <br />
+                
+                <label>Lecture Start Time</label>
+                <input type="time" asp-for="LectureStartTime" class="form-control" readonly="@(Model.flag ? true:false)" placeholder="Enter The Lecture Start Time Here">
+                <span asp-validation-for="LectureStartTime" class="text-danger"></span>
+                <br />
+
+                <fieldset>
+                    <label>Lecture Location</label>
+                    <select asp-for="LectureLocation">
+                        <option value="Lecture hall 1" readonly="@(Model.flag ? true:false)">Lecture hall 1</option>
+                        <option value="Lecture hall 2">Lecture hall 2</option>
+                        <option value="Lecture hall 3">Lecture hall 3</option>
+                        <option value="Lecture hall 4">Lecture hall 4</option>
+                        <option value="Lecture hall 5">Lecture hall 5</option>
+                        <option value="Lecture hall 6">Lecture hall 6</option>
+                        <option value="Lecture hall 7">Lecture hall 7</option>
+                        <option value="Lecture hall 8">Lecture hall 8</option>
+                        <option value="Lecture hall 9">Lecture hall 9</option>
+                    </select>
+                </fieldset> 
+                @* <span asp-validation-for="LectureLocation" class="text-danger"></span> *@
+                <br /> 
 
 
                 @if (Model.flag)
@@ -83,52 +105,42 @@
 
 
             <div class="DEV">
-                <input type="text" id="student1" class="form-control" asp-for="Name" value="@Model.Name" placeholder="Name">
-                <span asp-validation-for="Name" class="text-danger"></span>
+
+                <label>Lecture End Time</label>
+                <input type="time" class="form-control" asp-for="LectureEndTime" value="@Model.LectureEndTime" placeholder="Enter The New Lecture End Time Here">
+                <span asp-validation-for="LectureEndTime" class="text-danger"></span>
                 <br />
-                <fieldset id="student1">
-                    <label>Level</label>
-                    <select asp-for="Level" value="@Model.Level">
-                        <option value="1" selected="@(Model.Level == '1' ? true:false)">1</option>
-                        <option value="2" selected="@(Model.Level == '2' ? true:false)">2</option>
-                        <option value="3" selected="@(Model.Level == '3' ? true:false)">3</option>
-                        <option value="4" selected="@(Model.Level == '4' ? true:false)">4</option>
+
+                <fieldset id="">
+                    <label>Lecture Course</label>
+                    <select asp-for="LectureCourse" asp-for="LectureEndTime" value="@Model.LectureCourse">
+                        <option>Choose</option>
+                            @foreach (var course in Model.CoursesList())
+                            {
+                                    <option value="@course">@course</option>
+                            }
                     </select>
                 </fieldset>
-                <span asp-validation-for="Level" class="text-danger"></span>
+                <span asp-validation-for="LectureCourse" class="text-danger"></span>
                 <br />
 
-                <input type="text" email="user1" value="@Model.Email" asp-for="Email" class="form-control">
-                <span asp-validation-for="Email" class="text-danger"></span>
-                <br />
 
-                <label>Password</label>
-                <input type="password" value="@Model.Password" asp-for="Password" class="form-control">
-                <span asp-validation-for="Password" class="text-danger"></span>
-                <br />
 
-                <input type="text" value="@Model.Phone" asp-for="Phone" class="form-control" placeholder="Phone">
-                <br />
-                <span asp-validation-for="Phone" class="text-danger"></span>
 
-                <label>BirthDate</label>
-                <input type="date" value="@Model.BirthDate" asp-for="BirthDate" class="form-control">
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
+                <fieldset id="">
+                    <label>Lecture Instructor</label>
+                    <select asp-for="LectureInstructor" asp-for="LectureEndTime" value="@Model.LectureInstructor">
+                        <option>Choose</option>
+                            @foreach (var instructor in Model.InstructorsList())
+                            {
+                                <option value="@instructor">@instructor</option>
+                            }
+                    </select>
+                </fieldset>
+                <span asp-validation-for="LectureInstructor" class="text-danger"></span>
                 <br />
-
-               <label>
-                    <input type="radio" name="gender" asp-for="Gender" value="M" checked="@(Model.Gender=='M' ? true:false)" />
-                    Male
-                </label>
-
-                <label>
-                    <input type="radio" name="gender" asp-for="Gender" value="F" checked="@(Model.Gender=='F' ? true:false)" />
-                    Female
-                </label>
-                <span asp-validation-for="Gender" class="text-danger"></span>
-                <br />
-                <br />
-          </div>          
+               
+            </div>          
                 
                
                 
@@ -145,8 +157,7 @@
                             border: none;
                             color: #ddd;
                             padding: 10px 20px;
-                            border-radius: 5px;"
-                            @* onclick="Model.D()" *@>
+                            border-radius: 5px;">
                         Search
                     </button>
                 }
@@ -159,7 +170,7 @@
                             color: #ddd;
                             padding: 10px 20px;
                             border-radius: 5px;">
-                        Update
+                                Update
                     </button>
                 }
 

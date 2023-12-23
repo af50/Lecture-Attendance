@@ -10,14 +10,18 @@ namespace LectureAttendance.Models
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //M:M
             modelBuilder.Entity<Enrollment>()
                 .HasKey(e => new { e.CourseId, e.StudentId });
-
+            //M:M
             modelBuilder.Entity<InstructorStudent>()
                 .HasKey(e => new { e.StudentId, e.InstructorId });
-
+            //Composite Key
             modelBuilder.Entity<Lecture>()
                 .HasKey(e => new { e.Location, e.DateOfLecture, e.StartTime });
+            //M:M
+            modelBuilder.Entity<Attendance>()
+                .HasKey(a => new { a.StudentID, a.LecturesLocation, a.LecturesDateOfLecture, a.LecturesStartTime });
         }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Student> Students {  get; set; }
@@ -26,5 +30,6 @@ namespace LectureAttendance.Models
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<InstructorStudent> InstructorsStudents { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
     }
 }

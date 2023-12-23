@@ -17,6 +17,11 @@ namespace LectureAttendance.Pages.Control.Update
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
         public string CourseName { get; set; }
+        
+        [BindProperty]
+        [Required(ErrorMessage = "This Field Is Required")]
+        public char CourseLevel { get; set; }
+
 
         
         public string errorMessage = "";
@@ -25,6 +30,7 @@ namespace LectureAttendance.Pages.Control.Update
 
         [BindProperty]
         public string Action { get; set;  }
+
 
         public IActionResult OnGet()
         {
@@ -45,6 +51,8 @@ namespace LectureAttendance.Pages.Control.Update
                 return Page();
             }
         }
+
+
         public void OnPost()
         {
             if (Action == "Get")
@@ -55,7 +63,8 @@ namespace LectureAttendance.Pages.Control.Update
                 if (c != null)
                 {
 
-                    CourseName = c.Name;
+                    CourseName = c.CourseName;
+                    CourseLevel = c.RelatedLevel;
                     
                     flag = true;
 
@@ -72,19 +81,19 @@ namespace LectureAttendance.Pages.Control.Update
                     Course UpdatedCourse = new();
 
                     UpdatedCourse.CourseId = CourseCode;
-                    UpdatedCourse.Name = CourseName;
+                    UpdatedCourse.CourseName = CourseName;
                     
                     try
                     {
                         db.Courses.Update(UpdatedCourse);
                         db.SaveChanges();
+                        successMessage = "The Course Updated Successfully!";
                     }
                     catch { errorMessage = "The Data Has Never Changed!"; }
 
-                    successMessage = "The Course Updated Successfully!";
-
                     CourseCode = "";
                     CourseName = "";
+                    CourseLevel = '\0';
                     
                     ModelState.Clear();
                 }

@@ -46,7 +46,7 @@ namespace LectureAttendance.Pages.Control.Add
    
         public IQueryable<string> CoursesList()
         {
-            var CoursesList = from course in db.Courses select course.Name;
+            var CoursesList = from course in db.Courses select course.CourseName;
             return CoursesList;
         }
 
@@ -84,7 +84,7 @@ namespace LectureAttendance.Pages.Control.Add
             {
                 Lecture lecture = new Lecture();
                 
-                lecture.CourseId = (from Course in db.Courses where Course.Name == CourseName select Course.CourseId).Single();
+                lecture.CourseId = (from Course in db.Courses where Course.CourseName == CourseName select Course.CourseId).Single();
                 lecture.InstructorId = (from Instructor in db.Instructors where Instructor.Name == InstructorName select Instructor.InstructorId).Single();
                 lecture.Location = Location;
                 lecture.DateOfLecture = DateOfLecture;

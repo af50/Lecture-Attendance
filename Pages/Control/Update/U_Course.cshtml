@@ -57,11 +57,11 @@
 
 
                 <label>Course Code</label>
-                <input type="text" id="student1" asp-for="CourseCode" class="form-control" readonly="@(Model.flag ? true:false)">
+                <input type="text" id="student1" asp-for="CourseCode" class="form-control" readonly="@(Model.flag ? true:false)" placeholder="Enter An Exist Course Code Here">
                 <span asp-validation-for="CourseCode" class="text-danger"></span>
                 <br />
-
-
+                
+                
                 @if (Model.flag)
                 {
                             <style>.DEV
@@ -83,9 +83,15 @@
 
 
             <div class="DEV">
-                <input type="text" id="student1" class="form-control" asp-for="CourseName" value="@Model.CourseName">
+                <input type="text" class="form-control" asp-for="CourseName" value="@Model.CourseName" placeholder="Enter The New Course Name Here">
                 <span asp-validation-for="CourseName" class="text-danger"></span>
                 <br />
+
+                <label>Related Level</label>
+                <input type="text" class="form-control" asp-for="CourseLevel" value="@Model.CourseLevel" placeholder="Enter The New Related Level Here">
+                <span asp-validation-for="CourseLevel" class="text-danger"></span>
+                <br />
+
                 <br />
           </div>          
                 

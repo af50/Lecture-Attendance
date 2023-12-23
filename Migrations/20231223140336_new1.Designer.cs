@@ -3,6 +3,7 @@ using LectureAttendance.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LectureAttendance.Migrations
 {
     [DbContext(typeof(PContext))]
-    partial class PContextModelSnapshot : ModelSnapshot
+    [Migration("20231223140336_new1")]
+    partial class new1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,20 +76,25 @@ namespace LectureAttendance.Migrations
                     b.Property<string>("StudentID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("LecturesLocation")
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("DateOfLecture")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("StartTime")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LecturesDateOfLecture")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("LecturesLocation")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("LecturesStartTime")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("LectureAttendanceTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("StudentID", "LecturesLocation", "LecturesDateOfLecture", "LecturesStartTime");
+                    b.HasKey("StudentID", "Location", "DateOfLecture", "StartTime");
 
                     b.HasIndex("LecturesLocation", "LecturesDateOfLecture", "LecturesStartTime");
 
@@ -277,9 +285,7 @@ namespace LectureAttendance.Migrations
 
                     b.HasOne("LectureAttendance.Models.Lecture", "Lectures")
                         .WithMany()
-                        .HasForeignKey("LecturesLocation", "LecturesDateOfLecture", "LecturesStartTime")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LecturesLocation", "LecturesDateOfLecture", "LecturesStartTime");
 
                     b.Navigation("Lectures");
 

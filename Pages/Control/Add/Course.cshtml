@@ -61,10 +61,17 @@
             <label>Course Code</label>
             <input type="text" class="form-control" asp-for="CourseID" placeholder="Enter Course Code Here">
             <span asp-validation-for="CourseID" class="text-danger"></span>
+            <br />
 
             <label>Course Name</label>
             <input type="text" class="form-control" asp-for="CourseName" placeholder="Enter Course Name Here">
             <span asp-validation-for="CourseName" class="text-danger"></span>
+            <br />
+            
+            <label>Related Level</label>
+            <input type="text" class="form-control" asp-for="CourseLevel" placeholder="Enter Course Level Here">
+            <span asp-validation-for="CourseLevel" class="text-danger"></span>
+            <br />
            
             <button type="submit" class="btn" style="  display: inline-block;
                     background-color: #172432;

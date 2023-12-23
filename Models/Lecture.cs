@@ -15,9 +15,11 @@ namespace LectureAttendance.Models
         public string Location { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         public string DateOfLecture { get; set; }
 
         [Required]
+        [DataType(DataType.Time)]
         public string StartTime { get; set; }
 
         [Required]

@@ -3,3 +3,151 @@
 @{
     ViewBag.UserType = HttpContext.Session.GetString("Type");
 }
+
+
+<head>
+    <title>Delete</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-5.3.2-dist/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Control/Add/Lecture">Add</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" asp-page="/Control/Update/U_Lecture">Update</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Delete</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+    <div class="a">
+        <div class="container-fluid">
+            <form action="" id="loginForm" method="post">
+                <h1 style="margin-bottom:5%;">Delete A Lecture</h1>
+
+                <br />
+                @if(Model.errorMessage.Length > 0)
+                {
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>@Model.errorMessage</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                else if(Model.successMessage.Length > 0)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>@Model.successMessage</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+
+                <label>Lecture Date</label>
+                <input type="date" asp-for="LectureDate" class="form-control" readonly="@(Model.flag ? true:false)" placeholder="Enter The Lecture Date Here">
+                <span asp-validation-for="LectureDate" class="text-danger"></span>
+                <br />
+
+
+                @if (Model.flag)
+                {
+                            <style>.DEV
+                                {
+                                    display: inline;
+                                }
+                            </style>
+                }
+                else
+                {
+                            <style>.DEV
+                                {
+                                    display: none;
+                                }
+                            </style>
+                }
+
+             
+
+
+            <div class="DEV">
+
+               <fieldset id="">
+                    <label>Lecture Start Time</label>
+                    <select asp-for="LectureStartTime">
+                        <option>Choose</option>
+                            @foreach (var startTime in Model.LectureStartTimeList())
+                            {
+                                <option value="@startTime">@startTime</option>
+                            }
+                    </select>
+                </fieldset>
+                <span asp-validation-for="LectureStartTime" class="text-danger"></span>
+                <br />
+                   
+                <fieldset id="">
+                    <label>Lecture Location</label>
+                    <select asp-for="LectureLocation">
+                        <option>Choose</option>
+                            @foreach (var location in Model.LectureLocationList())
+                            {
+                                <option value="@location">@location</option>
+                            }
+                    </select>
+                </fieldset>
+                <span asp-validation-for="LectureLocation" class="text-danger"></span>
+                <br />
+
+          </div>          
+                
+               
+                
+
+                   
+                    
+
+                 @if (Model.flag == false){
+                         
+
+                    <input type="hidden" asp-for="Action" value="Get"/>
+                    <button type="submit" class="btn" style="  display: inline-block;
+                            background-color: #172432;
+                            border: none;
+                            color: #ddd;
+                            padding: 10px 20px;
+                            border-radius: 5px;">
+                        Search
+                    </button>
+                }
+                else
+                { 
+                    <input type="hidden" asp-for="Action" value="Delete"/>
+                    <button type="submit" class="btn" style="  display: inline-block;
+                            background-color: #172432;
+                            border: none;
+                            color: #ddd;
+                            padding: 10px 20px;
+                            border-radius: 5px;">
+                        Delete
+                    </button>
+                }
+
+                
+            </form>
+        </div>
+    </div>
+
+</body>

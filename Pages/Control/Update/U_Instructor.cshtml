@@ -57,8 +57,8 @@
 
 
                 <label>Instructor ID</label>
-                <input type="text" id="student1" asp-for="InstructorId" class="form-control" readonly="@(Model.flag ? true:false)">
-                @* <span asp-validation-for="Id" class="text-danger"></span> *@
+                <input type="text" asp-for="InstructorId" class="form-control" readonly="@(Model.flag ? true:false)" placeholder="Enter An Exist Instructor ID Here">
+                <span asp-validation-for="InstructorId" class="text-danger"></span>
                 <br />
 
 
@@ -85,26 +85,26 @@
             <div class="DEV">
 
                 <label>Name</label>
-                <input type="text" id="student1" class="form-control" asp-for="Name" value="@Model.Name">
+                <input type="text" id="student1" class="form-control" asp-for="Name" value="@Model.Name" placeholder="Enter The New Instructor Name Here">
                 <span asp-validation-for="Name" class="text-danger"></span>
                 <br />
                 
                 <label>Department</label>
-                <input type="text" email="user1" value="@Model.Department" asp-for="Department" class="form-control">
+                <input type="text" email="user1" value="@Model.Department" asp-for="Department" class="form-control" placeholder="Enter The New Instructor Department Here">
                 <span asp-validation-for="Department" class="text-danger"></span>
                 <br />
 
-                <input type="text" email="user1" value="@Model.Email" asp-for="Email" class="form-control">
+                <input type="text" email="user1" value="@Model.Email" asp-for="Email" class="form-control" placeholder="Enter The New Instructor Email Here">
                 <span asp-validation-for="Email" class="text-danger"></span>
                 <br />
 
                 <label>Password</label>
-                <input type="password" value="@Model.Password" asp-for="Password" class="form-control">
+                <input type="password" value="@Model.Password" asp-for="Password" class="form-control" placeholder="Enter The New Instructor Password Here">
                 <span asp-validation-for="Password" class="text-danger"></span>
                 <br />
 
                 <label>Phone</label>
-                <input type="text" value="@Model.Phone" asp-for="Phone" class="form-control">
+                <input type="text" value="@Model.Phone" asp-for="Phone" class="form-control" placeholder="Enter The New Instructor Phone Here">
                 <span asp-validation-for="Phone" class="text-danger"></span>
                 <br />
 

@@ -37,6 +37,12 @@
                                 </ul>
                             </li>
                         }
+                        @if (ViewBag.UserType == "Student")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Enrollment">Enrollment</a>
+                            </li>
+                        }
                         @if (ViewBag.UserType == null)
                         {
                             <li class="nav-item">

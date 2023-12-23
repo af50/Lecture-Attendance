@@ -12,9 +12,16 @@ namespace LectureAttendance.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            if (HttpContext.Session.GetString("Type")==null)
+            {
+                return RedirectToPage("/Login/Index");
+            }
+            else
+            {
+                return Page();
+            }
         }
     }
 }

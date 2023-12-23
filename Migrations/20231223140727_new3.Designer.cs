@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LectureAttendance.Migrations
 {
     [DbContext(typeof(PContext))]
-    [Migration("20231219073603_new")]
-    partial class @new
+    [Migration("20231223140727_new3")]
+    partial class new3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,14 +71,46 @@ namespace LectureAttendance.Migrations
                     b.ToTable("Admins");
                 });
 
+            modelBuilder.Entity("LectureAttendance.Models.Attendance", b =>
+                {
+                    b.Property<string>("StudentID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LecturesLocation")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LecturesDate")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LecturesStartTime")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LectureAttendanceTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LecturesDateOfLecture")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("StudentID", "LecturesLocation", "LecturesDate", "LecturesStartTime");
+
+                    b.HasIndex("LecturesLocation", "LecturesDateOfLecture", "LecturesStartTime");
+
+                    b.ToTable("Attendances");
+                });
+
             modelBuilder.Entity("LectureAttendance.Models.Course", b =>
                 {
                     b.Property<string>("CourseId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("CourseName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RelatedLevel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
 
                     b.HasKey("CourseId");
 
@@ -160,24 +192,30 @@ namespace LectureAttendance.Migrations
 
             modelBuilder.Entity("LectureAttendance.Models.Lecture", b =>
                 {
-                    b.Property<string>("CourseId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("InstructorId")
+                    b.Property<string>("Location")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("DateOfLecture")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Location")
+                    b.Property<string>("StartTime")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CourseId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("EndTime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Time")
+                    b.Property<string>("InstructorId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CourseId", "InstructorId", "DateOfLecture");
+                    b.HasKey("Location", "DateOfLecture", "StartTime");
+
+                    b.HasIndex("CourseId");
 
                     b.HasIndex("InstructorId");
 
@@ -233,6 +271,23 @@ namespace LectureAttendance.Migrations
                         .HasForeignKey("InstructorsInstructorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LectureAttendance.Models.Attendance", b =>
+                {
+                    b.HasOne("LectureAttendance.Models.Student", "Students")
+                        .WithMany()
+                        .HasForeignKey("StudentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LectureAttendance.Models.Lecture", "Lectures")
+                        .WithMany()
+                        .HasForeignKey("LecturesLocation", "LecturesDateOfLecture", "LecturesStartTime");
+
+                    b.Navigation("Lectures");
+
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("LectureAttendance.Models.Enrollment", b =>

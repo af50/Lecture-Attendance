@@ -12,36 +12,30 @@ namespace LectureAttendance.Pages.Control.Update
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
-        public string Id { get; set; }
+        public string LectureLocation { get; set; }
+        
+        [BindProperty]
+        [Required(ErrorMessage = "This Field Is Required")]
+        public string LectureInstructor { get; set; }
+        
+        [BindProperty]
+        [Required(ErrorMessage = "This Field Is Required")]
+        public string LectureCourse { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
-        public string Name { get; set; }
+        [DataType(DataType.Date)]
+        public string LectureDate { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
-        public char Level { get; set; }
-
+        [DataType(DataType.Time)]
+        public string LectureStartTime { get; set; }
+        
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
-        public string Email { get; set; }
-
-        [BindProperty]
-        [Required(ErrorMessage = "This Field Is Required")]
-        public string Password { get; set; }
-
-        [BindProperty]
-        [Required(ErrorMessage = "This Field Is Required")]
-        public string Phone { get; set; }
-
-
-        [BindProperty]
-        [Required(ErrorMessage = "This Field Is Required")]
-        public string BirthDate { get; set; }
-
-        [BindProperty]
-        [Required(ErrorMessage = "This Field Is Required")]
-        public char Gender { get; set; }
+        [DataType(DataType.Time)]
+        public string LectureEndTime { get; set; }
 
 
         public string errorMessage = "";
@@ -49,7 +43,7 @@ namespace LectureAttendance.Pages.Control.Update
         public bool flag = false;
 
         [BindProperty]
-        public string Action { get; set;  }
+        public string Action { get; set; }
 
         public IActionResult OnGet()
         {
@@ -71,74 +65,74 @@ namespace LectureAttendance.Pages.Control.Update
             }
         }
 
+        public IQueryable<string> CoursesList()
+        {
+            var CoursesList = from course in db.Courses select course.CourseName;
+            return CoursesList;
+        }
+
+
+        public IQueryable<string> InstructorsList()
+        {
+            var InstructorsList = from instructor in db.Instructors select instructor.Name;
+            return InstructorsList;
+        }
+
         public void OnPost()
         {
-            errorMessage = Action;
             if (Action == "Get")
             {
-                Student std = new Student();
-                std = db.Students.Find(Id);
+                var lecture = (from lec in db.Lectures where LectureDate == lec.DateOfLecture
+                            && LectureStartTime == lec.StartTime
+                            && LectureLocation == lec.Location
+                            select lec).FirstOrDefault();
 
-                if (std != null)
+                if (lecture != null)
                 {
-
-                    Name = std.Name;
-                    Email = std.Email;
-                    Phone = std.Phone;
-                    Gender = std.Gender;
-                    Level = std.Level;
-                    BirthDate = std.DateOfBirth;
-                    Password = "";
+                    LectureEndTime =lecture.EndTime;
+                    LectureCourse = lecture.CourseId;
+                    LectureInstructor=lecture.InstructorId;
 
                     flag = true;
 
                 }
                 else
                 {
-                    errorMessage = "Student Not Found!";
+                    errorMessage = "Lecture Not Found!";
                 }
             }
-            else if (Action  == "Update")
+            else if (Action == "Update")
             {
                 if (ModelState.IsValid)
                 {
-                    errorMessage = "Petetetetetetetete";
-
-                    Student UpdatedStudent = new Student();
-
-                    UpdatedStudent.StudentId = Id;
-                    UpdatedStudent.Name = Name;
-                    UpdatedStudent.Email = Email;
-                    UpdatedStudent.Gender = Gender;
-                    UpdatedStudent.Phone = Phone;
-                    UpdatedStudent.Password = BCrypt.Net.BCrypt.HashPassword(Password);
-                    UpdatedStudent.DateOfBirth = BirthDate;
-                    UpdatedStudent.Level = Level;
-
                     try
                     {
-                        db.Students.Update(UpdatedStudent);
-                    db.SaveChanges();
+                        Lecture lecture = new();
+                        lecture.CourseId = (from Course in db.Courses where Course.CourseName == LectureCourse select Course.CourseId).Single(); ;
+                        lecture.InstructorId = (from Instructor in db.Instructors where Instructor.InstructorId == LectureInstructor select Instructor.InstructorId).Single(); ;
+                        lecture.Location = LectureLocation;
+                        lecture.DateOfLecture = LectureDate;
+                        lecture.StartTime = LectureStartTime;
+                        lecture.EndTime = LectureEndTime;
+
+                        db.Lectures.Update(lecture);
+                        db.SaveChanges();
+                        successMessage = "The Lecture Updated Successfully!";
+
+                        LectureDate = "";
+                        LectureStartTime = "";
+                        LectureLocation = "";
+
+                        ModelState.Clear();
+                    } catch 
+                    {
+                        errorMessage = "Error!";
+                        flag = true;
                     }
-                    catch { errorMessage = "The Data Has Never Changed!"; }
-
-                    successMessage = "The Student Updated Successfully!";
-
-                    Id = "";
-                    Name = "";
-                    Email = "";
-                    Password = "";
-                    Level = '\0';
-                    Gender = '\0';
-                    Phone = "";
-                    BirthDate = "";
-                    errorMessage = "";
-
-                    ModelState.Clear();
                 }
                 else
                 {
-                    errorMessage = "Error! Check One Or More Inputs!";
+                    errorMessage = "Error!";
                     flag = true;
                 }
             }

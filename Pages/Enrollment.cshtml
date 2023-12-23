@@ -1,0 +1,63 @@
+﻿@page
+@model LectureAttendance.Pages.EnrollmentModel
+@{
+    ViewBag.UserType = HttpContext.Session.GetString("Type");
+}
+
+<head>
+    <title>Register</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-5.3.2-dist/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="a">
+        <div class="container-fluid">
+            <form action="" id="loginForm" method="post">
+                <h1 style="margin-bottom:5%;">Register</h1>
+
+
+                @if (Model.errorMessage.Length > 0)
+                {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>@Model.errorMessage</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                }
+                else if (Model.successMessage.Length > 0)
+                {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>@Model.successMessage</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                }
+            
+
+                <fieldset>
+                    <label>Choose The Course You Want To Register In</label>
+                    <select asp-for="SelectedCourseName">
+                        @foreach (var CourseName in Model.CoursesList())
+                        {
+                            <option value="@CourseName">@CourseName</option>
+                        }
+                    </select>
+                </fieldset>
+                <br />
+                    
+                <br />
+                <br />
+                <button type="submit" class="btn" style="  display: inline-block;
+                    background-color: #172432;
+                    border: none;
+                    color: #ddd;
+                    padding: 10px 20px;
+                    border-radius: 5px;">
+                            Register
+                </button>
+            </form>
+        </div>
+    </div>
+
+</body>

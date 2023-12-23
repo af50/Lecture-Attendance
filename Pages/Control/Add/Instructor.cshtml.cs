@@ -1,4 +1,3 @@
-using LectureAttendance.Migrations;
 using LectureAttendance.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -84,9 +83,10 @@ namespace LectureAttendance.Pages.Control.Add
                 {
                     db.Instructors.Add(newInstructor);
                     db.SaveChanges();
-                } catch { errorMessage = "The Instructor ID Exists! Enter Another ID!"; }
+                    successMessage = "The Instructor Added Successfully!";
+                }
+                catch { errorMessage = "The Instructor ID Exists! Enter Another ID!"; }
 
-                successMessage = "The Instructor Added Successfully!";
 
                 Id = "";
                 Name = "";
@@ -102,7 +102,7 @@ namespace LectureAttendance.Pages.Control.Add
             }
             else
             {
-                errorMessage = "Error!";
+                errorMessage = "Error! Check One Or More Inputs!";
             }
         }
 

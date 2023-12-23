@@ -32,7 +32,8 @@ namespace LectureAttendance.Migrations
                 columns: table => new
                 {
                     CourseId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CourseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RelatedLevel = table.Column<string>(type: "nvarchar(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,15 +104,16 @@ namespace LectureAttendance.Migrations
                 name: "Lectures",
                 columns: table => new
                 {
+                    Location = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DateOfLecture = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StartTime = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CourseId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     InstructorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    DateOfLecture = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Time = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    EndTime = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Lectures", x => new { x.CourseId, x.InstructorId, x.DateOfLecture });
+                    table.PrimaryKey("PK_Lectures", x => new { x.Location, x.DateOfLecture, x.StartTime });
                     table.ForeignKey(
                         name: "FK_Lectures_Courses_CourseId",
                         column: x => x.CourseId,
@@ -176,6 +178,40 @@ namespace LectureAttendance.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Attendances",
+                columns: table => new
+                {
+                    StudentID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DateOfLecture = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StartTime = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LectureAttendanceTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LecturesLocation = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    LecturesDateOfLecture = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    LecturesStartTime = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attendances", x => new { x.StudentID, x.Location, x.DateOfLecture, x.StartTime });
+                    table.ForeignKey(
+                        name: "FK_Attendances_Lectures_LecturesLocation_LecturesDateOfLecture_LecturesStartTime",
+                        columns: x => new { x.LecturesLocation, x.LecturesDateOfLecture, x.LecturesStartTime },
+                        principalTable: "Lectures",
+                        principalColumns: new[] { "Location", "DateOfLecture", "StartTime" });
+                    table.ForeignKey(
+                        name: "FK_Attendances_Students_StudentID",
+                        column: x => x.StudentID,
+                        principalTable: "Students",
+                        principalColumn: "StudentId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Attendances_LecturesLocation_LecturesDateOfLecture_LecturesStartTime",
+                table: "Attendances",
+                columns: new[] { "LecturesLocation", "LecturesDateOfLecture", "LecturesStartTime" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_CourseInstructor_InstructorsInstructorId",
                 table: "CourseInstructor",
@@ -192,6 +228,11 @@ namespace LectureAttendance.Migrations
                 column: "InstructorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Lectures_CourseId",
+                table: "Lectures",
+                column: "CourseId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Lectures_InstructorId",
                 table: "Lectures",
                 column: "InstructorId");
@@ -202,6 +243,9 @@ namespace LectureAttendance.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Admins");
+
+            migrationBuilder.DropTable(
+                name: "Attendances");
 
             migrationBuilder.DropTable(
                 name: "CourseInstructor");

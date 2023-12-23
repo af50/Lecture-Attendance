@@ -61,7 +61,7 @@
                 <fieldset id="">
                     <label>Lecture Course</label>
                     <select asp-for="CourseName">
-                        @*<option>Choose</option>*@
+                        <option>Choose</option>
                         @foreach (var course in Model.CoursesList())
                         {
                                 <option value="@course">@course</option>
@@ -77,7 +77,7 @@
                 <fieldset id="">
                     <label>Lecture Instructor</label>
                     <select asp-for="InstructorName">
-                      @* <option>Choose</option> *@
+                        <option>Choose</option>
                         @foreach(var instructor in Model.InstructorsList())
                         {
                             <option value="@instructor">@instructor</option>

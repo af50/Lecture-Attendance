@@ -47,7 +47,7 @@ namespace LectureAttendance.Pages.Control.Delete
                 db.Courses.Remove(course);
                 db.SaveChanges();
             }
-            catch { errorMessage = "The Course ID You entered Is Not Found!"; }
+            catch { errorMessage = "The Course ID You Entered Is Not Found!"; }
 
             successMessage = "The Course Deleted Successfully!";
 

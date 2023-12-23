@@ -12,9 +12,14 @@ namespace LectureAttendance.Pages.Control.Add
         [Required(ErrorMessage = "This Field Is Required")]
         [BindProperty]
         public string CourseID { get; set; }
+
         [Required(ErrorMessage = "This Field Is Required")]
         [BindProperty]
         public string CourseName { get; set; }
+        
+        [Required(ErrorMessage = "This Field Is Required")]
+        [BindProperty]
+        public char CourseLevel { get; set; }
 
 
         public string errorMessage = "";
@@ -46,22 +51,27 @@ namespace LectureAttendance.Pages.Control.Add
                 PContext db = new PContext();
                 Course course = new Course();
                 course.CourseId = CourseID;
-                course.Name = CourseName;
+                course.CourseName = CourseName;
+                course.RelatedLevel = CourseLevel;
                 
                 try
                 {
                     db.Add(course);
                     db.SaveChanges();
-                } catch { errorMessage = "The Course Code Exists! Enter Another Code!"; }
+                    successMessage = "The Course Added Successfully!";
+                }
+                catch { errorMessage = "The Course Code Exists! Enter Another Code!"; }
                 
-                successMessage = "The Course Added Successfully!";
+
                 CourseID = "";
                 CourseName = "";
+                CourseLevel = '\0';
+
                 ModelState.Clear();
             }
             else
             {
-                errorMessage = "Error!";
+                errorMessage = "Error! Check One Or More Inputs!";
             }
         }
     } 
