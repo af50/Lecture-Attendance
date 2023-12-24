@@ -36,7 +36,7 @@ namespace LectureAttendance.Pages.Control.Add
         public string BirthDate { get; set; }
 
         [BindProperty]
-        [Required]
+        [Required(ErrorMessage = "This Field Is Required")]
         public string Gender { get; set; }
 
 

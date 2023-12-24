@@ -9,17 +9,13 @@
     <title>Add</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bootstrap-5.3.2-dist/bootstrap-5.3.2-dist/css/bootstrap.min.css">
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link">Add</a>
@@ -35,30 +31,26 @@
             </div>
         </nav>
     </header>
-
     <div class="a">
         <div class="container-fluid" style="height:700px">
             <form method="post">
                 <h1 style="margin-bottom:5%;">Add A New Lecture</h1>
-
                 @if (Model.errorMessage.Length > 0)
                 {
-                           <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                               <strong>@Model.errorMessage</strong>
-                               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                           </div>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>@Model.errorMessage</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 }
                 else if (Model.successMessage.Length > 0)
                 {
-                          <div class="alert alert-success alert-dismissible fade show" role="alert">
-                              <strong>@Model.successMessage</strong>
-                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                          </div>
-                }
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>@Model.successMessage</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }     
 
-                
-                
-                <fieldset id="">
+                <fieldset>
                     <label>Lecture Course</label>
                     <select asp-for="CourseName">
                         <option>Choose</option>
@@ -70,11 +62,8 @@
                 </fieldset>
                 <span asp-validation-for="CourseName" class="text-danger"></span>
                 <br />
-
-
-
-                
-                <fieldset id="">
+        
+                <fieldset>
                     <label>Lecture Instructor</label>
                     <select asp-for="InstructorName">
                         <option>Choose</option>
@@ -85,10 +74,9 @@
                     </select>
                 </fieldset>
                 <span asp-validation-for="InstructorName" class="text-danger"></span>
-                
-                
-                 <br />
-                 <fieldset>
+                <br />
+
+                <fieldset>
                     <label>Lecture Location</label>
                     <select asp-for="Location">
                         <option value="Lecture hall 1">Lecture hall 1</option>
@@ -103,31 +91,32 @@
                     </select>
                 </fieldset> 
                 <span asp-validation-for="Location" class="text-danger"></span>
-
                 <br /> 
+
                 <label>Lecture Date</label>
-                <input asp-for="DateOfLecture" type="date" phone="user1" class="form-control">
+                <input asp-for="DateOfLecture" type="date" class="form-control">
                 <span asp-validation-for="DateOfLecture" class="text-danger"></span>
-                
+                <br />
+
                 <label>Lecture Start Time</label>
-                <input asp-for="StartTime" type="time" phone="user1" class="form-control">
+                <input asp-for="StartTime" type="time" class="form-control">
                 <span asp-validation-for="StartTime" class="text-danger"></span>
+                <br />
 
                 <label>Lecture End Time</label>
-                <input asp-for="EndTime" type="time" phone="user1" class="form-control">
+                <input asp-for="EndTime" type="time" class="form-control">
                 <span asp-validation-for="EndTime" class="text-danger"></span>
-
                 <br />
-                <button type="submit" class="btn" style="  display: inline-block;
-          background-color: #172432;
-          border: none;
-          color: #ddd;
-          padding: 10px 20px;
-          border-radius: 5px;">
+
+                <button type="submit" class="btn" style="display: inline-block;
+                background-color: #172432;
+                border: none;
+                color: #ddd;
+                padding: 10px 20px;
+                border-radius: 5px;">
                     Add
                 </button>
             </form>
         </div>
     </div>
-
 </body>
