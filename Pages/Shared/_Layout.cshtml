@@ -45,11 +45,15 @@
                         @if (ViewBag.UserType == null)
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-page="/Login/Index">Sign in</a>
+                                <a class="nav-link" asp-page="/Login/Index">Log in</a>
                             </li>
                         }
                         else
                         {
+                            <li class="nav-item">
+                                <a class="nav-link">@ViewBag.UserEmail</a>
+                            </li>
+                            
                             <li class="nav-item">
                                 <a class="nav-link" asp-page="/Login/logout">Log out</a>
                             </li>

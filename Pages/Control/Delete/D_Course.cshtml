@@ -2,6 +2,7 @@
 @model LectureAttendance.Pages.Control.Delete.D_CourseModel
 @{
     ViewBag.UserType = HttpContext.Session.GetString("Type");
+    ViewBag.UserEmail = HttpContext.Session.GetString("Email");
 }
 <head>
         <title>Delete</title>

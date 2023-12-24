@@ -2,6 +2,7 @@
 @model LectureAttendance.Pages.Control.Update.U_Lecture
 @{
     ViewBag.UserType = HttpContext.Session.GetString("Type");
+    ViewBag.UserEmail = HttpContext.Session.GetString("Email");
 }
 
 <head>

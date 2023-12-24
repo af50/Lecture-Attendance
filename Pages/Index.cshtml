@@ -1,6 +1,7 @@
 ﻿@page
 @model IndexModel
 @{   
+    ViewBag.UserEmail = HttpContext.Session.GetString("Email");
     ViewBag.UserType = HttpContext.Session.GetString("Type");
     ViewData["Title"] = "Schedule";
 }
@@ -14,29 +15,69 @@
 
 
 <body>
-    
+
     <table>
-        
+
         <tr>
             <th>Location</th>
             <th>StartTime</th>
             <th>EndTime</th>
-            <th>InstructorId</th>
-            <th>CourseId</th>
-            <th>DateOfLecture</th>
+            <th>Instructor</th>
+            <th>Course</th>
+            <th>Date</th>
         </tr>
-        @foreach (var lecture in Model.LecturesList())
+
+
+
+
+        @foreach (var lecture in Model.WhichList)
         {
-                <tr>
-                    <td>@lecture.Location</td>
-                    <td>@lecture.StartTime</td>
-                    <td>@lecture.EndTime</td>
-                    <td>@lecture.InstructorId</td>
-                    <td>@lecture.CourseId</td>
-                    <td>@lecture.DateOfLecture</td>
-                </tr>
+            <tr>
+                <td>@lecture.Location</td>
+                <td>@lecture.StartTime</td>
+                <td>@lecture.EndTime</td>
+                <td>@lecture.InstructorId</td>
+                <td>@lecture.CourseId</td>
+                <td>@lecture.DateOfLecture</td>
+                @if (HttpContext.Session.GetString("Type") == "Student")
+                {
+                    <td>
+                        <button type="submit" class="btn" style="  display: inline-block;
+                        background-color: #172432;
+                        border: none;
+                        color: #ddd;
+                        padding: 10px 20px;
+                        border-radius: 5px;">
+                            Register
+                        </button>
+                    </td>
+                }
+                else if (HttpContext.Session.GetString("Type") == "Instructor")
+                {
+                    <td>
+                        <button type="submit" class="btn" style="  display: inline-block;
+                            background-color: #172432;
+                            border: none;
+                            color: #ddd;
+                            padding: 10px 20px;
+                            border-radius: 5px;">
+                            Start
+                        </button>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn" style="  display: inline-block;
+                            background-color: #172432;
+                            border: none;
+                            color: #ddd;
+                            padding: 10px 20px;
+                            border-radius: 5px;">
+                            End
+                        </button>
+                    </td>
+                }
+            </tr>
         }
-  
-  </table>
+
+    </table>
 
 </body>

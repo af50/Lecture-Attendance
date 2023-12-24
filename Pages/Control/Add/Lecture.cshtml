@@ -2,8 +2,8 @@
 @model LectureAttendance.Pages.Control.Add.LectureModel
 @{
     ViewBag.UserType = HttpContext.Session.GetString("Type");
+    ViewBag.UserEmail = HttpContext.Session.GetString("Email");
 }
-
 
 <head>
     <title>Add</title>
@@ -37,8 +37,8 @@
     </header>
 
     <div class="a">
-        <div class="container-fluid">
-            <form action="" id="loginForm" method="post">
+        <div class="container-fluid" style="height:700px">
+            <form method="post">
                 <h1 style="margin-bottom:5%;">Add A New Lecture</h1>
 
                 @if (Model.errorMessage.Length > 0)

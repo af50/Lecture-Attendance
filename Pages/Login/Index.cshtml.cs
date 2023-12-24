@@ -28,24 +28,29 @@ namespace LectureAttendance.Pages.Login
             if(!Student.IsNullOrEmpty() && Password!=null && BCrypt.Net.BCrypt.Verify(Password,Student.FirstOrDefault().Password))
             {
                 HttpContext.Session.SetString("Type", "Student");
-                HttpContext.Session.SetString("ID", Student.FirstOrDefault().StudentId);
+                HttpContext.Session.SetString("ID", Student.SingleOrDefault().StudentId);
+                HttpContext.Session.SetString("Email", Student.SingleOrDefault().Email);
                 HttpContext.Session.SetString("Level", Convert.ToString(Student.FirstOrDefault().Level));
                 return RedirectToPage("/Index");
             }         
             else if(!Admin.IsNullOrEmpty() && Password != null && BCrypt.Net.BCrypt.Verify(Password, Admin.FirstOrDefault().Password))
             {
 				HttpContext.Session.SetString("Type", "Admin");
-				return RedirectToPage("/Control/Add/Student");
+                HttpContext.Session.SetString("ID", Admin.SingleOrDefault().AdminId);
+                HttpContext.Session.SetString("Email", Admin.SingleOrDefault().Email);
+                return RedirectToPage("/Control/Add/Student");
 			}
 			else if (!Instructor.IsNullOrEmpty() && Password != null && BCrypt.Net.BCrypt.Verify(Password, Instructor.FirstOrDefault().Password))
 			{
 				HttpContext.Session.SetString("Type", "Instructor");
-                return RedirectToPage("/Login/Index");
+                HttpContext.Session.SetString("ID", Instructor.SingleOrDefault().InstructorId);
+                HttpContext.Session.SetString("Email", Instructor.SingleOrDefault().Email);
+                return RedirectToPage("/Index");
             }
 			else
             {
                 ErrorMessage = "Invalid Email or Password!";
-                return RedirectToPage("/Index");
+                return RedirectToPage("/Login/Index");
             }
         }
     }

@@ -2,6 +2,7 @@
 @model LectureAttendance.Pages.Control.Add.StudentModel
 @{
     ViewBag.UserType = HttpContext.Session.GetString("Type");
+    ViewBag.UserEmail = HttpContext.Session.GetString("Email");
 }
 
 <head>
@@ -12,33 +13,32 @@
 </head>
 
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link">Add</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" asp-page="/Control/Update/U_Student">Update</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-page="/Control/Delete/D_Student">Delete</a>
-                    </li>
-                </ul>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="margin-top:100px">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link">Add</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" asp-page="/Control/Update/U_Student">Update</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Control/Delete/D_Student">Delete</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
     <div class="a">
-        <div class="container-fluid">
-            <form action="" id="loginForm" method="post">
-                <h1 style="margin-bottom:5%;">Add A New Student</h1>
-
+        <div class="container-fluid" style="height:700px">
+            <form method="post">
+                <h1 >Add A New Student</h1>
 
                 @if(Model.errorMessage.Length > 0)
                 {
@@ -54,15 +54,15 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 }
-                <label>Student ID</label>
-            <input type="text" id="student1" asp-for="Id" class="form-control" placeholder="Enter The Student ID Here">
-            <span asp-validation-for="Id" class="text-danger"></span>
+                <label>Student Id</label>
+                <input type="text" asp-for="Id" class="form-control" placeholder="Id...">
+                <span asp-validation-for="Id" class="text-danger"></span>
            
-            <label>Name</label>
-                <input type="text" id="student1" class="form-control" asp-for="Name" placeholder="Enter The Student Name Here">
+                <label>Name</label>
+                <input type="text" class="form-control" asp-for="Name" placeholder="Name...">
                 <span asp-validation-for="Name" class="text-danger"></span>
                 
-                <fieldset id="student1">
+                <fieldset>
                     <label>Level</label>
                     <select asp-for="Level">
                         <option value="1">1</option>
@@ -71,31 +71,34 @@
                         <option value="4">4</option>
                     </select>
                 </fieldset>
-               <br />
+                <br />
+
                 <label>Email</label>
                 <input type="text" email="user1" asp-for="Email" class="form-control" placeholder="Enter The Student Email Here">
                 <span asp-validation-for="Email" class="text-danger"></span>
-                
+                <br />
+
                 <label>Password</label>
                 <input type="password" password="pass1" asp-for="Password" class="form-control" placeholder="Enter The Student Password Here">
                 <span asp-validation-for="Password" class="text-danger"></span>
-                
+                <br />
+
                 <label>Phone</label>
                 <input type="text" phone="user1" asp-for="Phone" class="form-control" placeholder="Enter The Student Phone Here">
-               
+                <br />
+
                 <label>BirthDate</label>
                 <input type="date" phone="user1" asp-for="BirthDate" class="form-control">
-               
+                <br />
 
                 <label>Gender</label>
                 <input type="radio" value='M' name="gender" asp-for="Gender" />
                 <label>Male</label>
                 <input type="radio" value='F' name="gender" asp-for="Gender" />
                 <label>Female</label>
-
-                    
                 <br />
                 <br />
+                
                 <button type="submit" class="btn" style="  display: inline-block;
                     background-color: #172432;
                     border: none;
@@ -107,5 +110,4 @@
             </form>
         </div>
     </div>
-
 </body>
