@@ -41,18 +41,24 @@ namespace LectureAttendance.Pages
         {
             Enrollment enrollment = new Enrollment();
             var CourseId = (string)(from c in db.Courses where c.CourseName == SelectedCourseName select c.CourseId).FirstOrDefault();
-
-            enrollment.CourseId = CourseId;
-            enrollment.StudentId = HttpContext.Session.GetString("ID");
-            enrollment.EnrollmentDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
-
-            try
+            if (CourseId != null)
             {
-                db.Enrollments.Add(enrollment);
-                db.SaveChanges();
-                successMessage = "Register Done!";
-            } catch { errorMessage = "Registered!"; }
+                enrollment.CourseId = CourseId;
+                enrollment.StudentId = HttpContext.Session.GetString("ID");
+                enrollment.EnrollmentDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
 
+                try
+                {
+                    db.Enrollments.Add(enrollment);
+                    db.SaveChanges();
+                    successMessage = "Register Done!";
+                }
+                catch { errorMessage = "Registered!"; }
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }

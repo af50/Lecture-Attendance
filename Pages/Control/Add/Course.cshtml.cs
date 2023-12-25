@@ -15,7 +15,7 @@ namespace LectureAttendance.Pages.Control.Add
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
-        [RegularExpression(@"^[a-zA-Z0-9 ].$", ErrorMessage = "The Course Name Should Consists Of Only Letters And Numbers")]
+        [RegularExpression(@"^[a-zA-Z0-9 ]+$", ErrorMessage = "The Course Name Should Consists Of Only Letters And Numbers")]
         public string CourseName { get; set; }
         
         [BindProperty]
