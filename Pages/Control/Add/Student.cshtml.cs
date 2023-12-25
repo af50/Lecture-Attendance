@@ -11,10 +11,12 @@ namespace LectureAttendance.Pages.Control.Add
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^1520[0-9]{5,6}$", ErrorMessage = "This Is An Invalid Student Id")]
         public string Id { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^[a-zA-Z]+ [a-zA-Z]+ [a-zA-Z]+$", ErrorMessage = "The Name Should Looks Like --> \"Salem Khaled Salah\" With Out Quotes")]
         public string Name { get; set; }
 
         [BindProperty]
@@ -23,10 +25,12 @@ namespace LectureAttendance.Pages.Control.Add
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^\w{5,20}\@attend\.std\.edu$", ErrorMessage = "The Email Should Looks Like \"example@attend.std.edu\" With Out Quotes")]
         public string Email { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^[^ ]{8,12}$", ErrorMessage = "The Password Should have 8-12 Charcters With No Spaces")]
         public string Password { get; set; }
 
         [BindProperty]

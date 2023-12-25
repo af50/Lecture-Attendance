@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LectureAttendance.Migrations
 {
     [DbContext(typeof(PContext))]
-    [Migration("20231225011743_new")]
+    [Migration("20231225022154_new")]
     partial class @new
     {
         /// <inheritdoc />

@@ -37,23 +37,26 @@ namespace LectureAttendance.Pages
             if (HttpContext.Session.GetString("Type") == "Student")
             {  
                 var courses = from enrollment in db.Enrollments where enrollment.StudentId == HttpContext.Session.GetString("ID") select enrollment.CourseId;
-                foreach (var course in courses)
+                if (courses != null && courses.Any())
                 {
-                    var StudentLecturesList = from lecture in db.Lectures where lecture.CourseId == course select lecture;
-                    if (!StudentLecturesList.IsNullOrEmpty())
+                    foreach (var course in courses)
                     {
-                        foreach (var l in StudentLecturesList)
+                        var StudentLecturesList = from lecture in db.Lectures where lecture.CourseId == course select lecture;
+                        if (!StudentLecturesList.IsNullOrEmpty())
                         {
-                            l.CourseId =  (from crse in db.Courses where l.CourseId == crse.CourseId select crse.CourseName).SingleOrDefault();
-                            l.InstructorId = (from instructor in db.Instructors where l.InstructorId == instructor.InstructorId select instructor.Name).SingleOrDefault();
-                        }
-                        if (lectures != null)
-                        {
-                            lectures = lectures.Union(StudentLecturesList);
-                        }
-                        else
-                        {
-                            lectures = StudentLecturesList;
+                            foreach (var l in StudentLecturesList)
+                            {
+                                l.CourseId = (from crse in db.Courses where l.CourseId == crse.CourseId select crse.CourseName).SingleOrDefault();
+                                l.InstructorId = (from instructor in db.Instructors where l.InstructorId == instructor.InstructorId select instructor.Name).SingleOrDefault();
+                            }
+                            if (lectures != null)
+                            {
+                                lectures = lectures.Union(StudentLecturesList);
+                            }
+                            else
+                            {
+                                lectures = StudentLecturesList;
+                            }
                         }
                     }
                 }
@@ -96,17 +99,17 @@ namespace LectureAttendance.Pages
             }
             else if (HttpContext.Session.GetString("Type") == "Student")
             {
-                StudentLecturesList();
+                //StudentLecturesList();
                 return Page();
             }
             else if (HttpContext.Session.GetString("Type") == "Instructor")
             {
-                InstructorLecturesList();
+                //InstructorLecturesList();
                 return Page();
             }
             else if (HttpContext.Session.GetString("Type") == "Admin")
             {
-                AdminLecturesList();
+                //AdminLecturesList();
                 return Page();
             }
             else

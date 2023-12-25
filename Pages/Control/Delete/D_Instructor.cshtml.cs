@@ -11,6 +11,7 @@ namespace LectureAttendance.Pages.Control.Delete
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required!")]
+        [RegularExpression(@"^[0-9]{14}$", ErrorMessage = "The Id Should Equals The Instructor's SSN")]
         public string InstructorID { get; set; }
 
         public string errorMessage = "";

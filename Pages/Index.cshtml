@@ -1,6 +1,6 @@
 ﻿@page
 @model IndexModel
-@{   
+@{
     ViewBag.UserEmail = HttpContext.Session.GetString("Email");
     ViewBag.UserType = HttpContext.Session.GetString("Type");
     ViewData["Title"] = "Schedule";
@@ -31,8 +31,6 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
-    @try
-    {
         <table>
             <tr>
                 <th>Location</th>
@@ -45,38 +43,45 @@
 
             @if (HttpContext.Session.GetString("Type") == "Student")
             {
-                foreach (var lecture in Model.StudentLecturesList())
+                var list = Model.StudentLecturesList();
+                if (list != null && list.Any())
                 {
-                    <tr>
-                        <td>@lecture.Location</td>
-                        <td>@lecture.StartTime</td>
-                        <td>@lecture.EndTime</td>
-                        <td>@lecture.InstructorId</td>
-                        <td>@lecture.CourseId</td>
-                        <td>@lecture.DateOfLecture</td>
+                    foreach (var lecture in list)
+                    {
+                        <tr>
+                            <td>@lecture.Location</td>
+                            <td>@lecture.StartTime</td>
+                            <td>@lecture.EndTime</td>
+                            <td>@lecture.InstructorId</td>
+                            <td>@lecture.CourseId</td>
+                            <td>@lecture.DateOfLecture</td>
 
-                        <td>
-                            <form method="post">
-                                <input type="hidden" asp-for="Action" value="Register"/>
-                                <input type="hidden" asp-for="Location" value="@lecture.Location"/>
-                                <input type="hidden" asp-for="Date" value="@lecture.DateOfLecture"/>
-                                <input type="hidden" asp-for="StartTime" value="@lecture.StartTime"/>
-                                <button type="submit" class="btn" style="  display: inline-block;
-                    background-color: #172432;
-                    border: none;
-                    color: #ddd;
-                    padding: 10px 20px;
-                    border-radius: 5px;">
-                                    Register
-                                </button>
-                            </form>
-                        </td>
+                            <td>
+                                <form method="post">
+                                    <input type="hidden" asp-for="Action" value="Register"/>
+                                    <input type="hidden" asp-for="Location" value="@lecture.Location"/>
+                                    <input type="hidden" asp-for="Date" value="@lecture.DateOfLecture"/>
+                                    <input type="hidden" asp-for="StartTime" value="@lecture.StartTime"/>
+                                    <button type="submit" class="btn" style="  display: inline-block;
+                        background-color: #172432;
+                        border: none;
+                        color: #ddd;
+                        padding: 10px 20px;
+                        border-radius: 5px;">
+                                        Register
+                                    </button>
+                                </form>
+                            </td>
                     </tr>
                 }
             }
-            else if (HttpContext.Session.GetString("Type") == "Instructor")
+        }
+        else if (HttpContext.Session.GetString("Type") == "Instructor")
+        {
+            var list = Model.InstructorLecturesList();
+            if (list != null && list.Any())
             {
-                foreach (var lecture in Model.InstructorLecturesList())
+                foreach (var lecture in list)
                 {
                     <tr>
                         <td>@lecture.Location</td>
@@ -137,9 +142,13 @@
                     </tr>
                 }
             }
-            else if (HttpContext.Session.GetString("Type") == "Admin")
+        }
+        else if (HttpContext.Session.GetString("Type") == "Admin")
+        {
+            var list = Model.AdminLecturesList();
+            if (list != null && list.Any())
             {
-                foreach (var lecture in Model.AdminLecturesList())
+                foreach (var lecture in list)
                 {
                     <tr>
                         <td>@lecture.Location</td>
@@ -150,23 +159,25 @@
                         <td>@lecture.DateOfLecture</td>
 
                         <td>
-                            <button type="submit" class="btn" style="  display: inline-block;
+                            <form method="post">
+                                <input type="hidden" asp-for="Action" value="Report" />
+                                <input type="hidden" asp-For="Location" value="@lecture.Location" />
+                                <input type="hidden" asp-For="Date" value="@lecture.DateOfLecture" />
+                                <input type="hidden" asp-For="StartTime" value="@lecture.StartTime" />
+                                <button type="submit" class="btn" style="  display: inline-block;
                         background-color: #172432;
                         border: none;
                         color: #ddd;
                         padding: 10px 20px;
                         border-radius: 5px;">
-                                Report
-                            </button>
+                                    Report
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 }
             }
-        </table>
-    }
-    catch @* (NullReferenceException) *@
-    {
-        <p>There Are No Lectures Available</p>
-    }
-
+        }
+        </table>  
 </body>
+	

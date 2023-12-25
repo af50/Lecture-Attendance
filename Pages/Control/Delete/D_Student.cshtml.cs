@@ -11,6 +11,7 @@ namespace LectureAttendance.Pages.Control.Delete
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required!")]
+        [RegularExpression(@"^1520[0-9]{5,6}$", ErrorMessage = "This Is An Invalid Student Id")]
         public string StudentID { get; set; }
 
         public string errorMessage = "";

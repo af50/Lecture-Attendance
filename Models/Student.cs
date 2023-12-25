@@ -12,6 +12,5 @@ namespace LectureAttendance.Models
         [Required]
         public char Level { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }
-        public virtual ICollection<InstructorStudent> InstructorStudents { get; set; }
     }
 }

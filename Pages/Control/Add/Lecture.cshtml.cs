@@ -31,12 +31,10 @@ namespace LectureAttendance.Pages.Control.Add
 
         [Required(ErrorMessage = "This field is required")]
         [BindProperty]
-        [DataType(DataType.Time)]
         public string StartTime { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
-        [BindProperty]
-        [DataType(DataType.Time)]
+        [BindProperty]      
         public string EndTime { get; set; }
 
 

@@ -5,7 +5,7 @@
 namespace LectureAttendance.Migrations
 {
     /// <inheritdoc />
-    public partial class enrollment : Migration
+    public partial class @new : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -77,30 +77,6 @@ namespace LectureAttendance.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CourseInstructor",
-                columns: table => new
-                {
-                    CoursesCourseId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    InstructorsInstructorId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CourseInstructor", x => new { x.CoursesCourseId, x.InstructorsInstructorId });
-                    table.ForeignKey(
-                        name: "FK_CourseInstructor_Courses_CoursesCourseId",
-                        column: x => x.CoursesCourseId,
-                        principalTable: "Courses",
-                        principalColumn: "CourseId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CourseInstructor_Instructors_InstructorsInstructorId",
-                        column: x => x.InstructorsInstructorId,
-                        principalTable: "Instructors",
-                        principalColumn: "InstructorId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Lectures",
                 columns: table => new
                 {
@@ -109,7 +85,8 @@ namespace LectureAttendance.Migrations
                     StartTime = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CourseId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     InstructorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    EndTime = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    EndTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsStarted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -147,31 +124,6 @@ namespace LectureAttendance.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Enrollments_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
-                        principalColumn: "StudentId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "InstructorsStudents",
-                columns: table => new
-                {
-                    InstructorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CourseId = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InstructorsStudents", x => new { x.StudentId, x.InstructorId });
-                    table.ForeignKey(
-                        name: "FK_InstructorsStudents_Instructors_InstructorId",
-                        column: x => x.InstructorId,
-                        principalTable: "Instructors",
-                        principalColumn: "InstructorId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_InstructorsStudents_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
                         principalColumn: "StudentId",

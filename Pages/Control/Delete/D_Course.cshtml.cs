@@ -11,6 +11,7 @@ namespace LectureAttendance.Pages.Control.Delete
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Requird!")]
+        [RegularExpression(@"^[A-Z][A-Z][1-4][0-9][0-9]$", ErrorMessage = "The Course Id Should Consists Of Two Letters And Three Numbers")]
         public string CourseID { get; set; }
 
         public string errorMessage = "";
@@ -42,7 +43,7 @@ namespace LectureAttendance.Pages.Control.Delete
 
             try
             {
-                var CourseId = (from c in db.Courses where c.CourseId == CourseID select c.CourseId).Single();
+                var CourseId = (from c in db.Courses where c.CourseId == CourseID select c.CourseId).SingleOrDefault();
                 course.CourseId = CourseId;
                 db.Courses.Remove(course);
                 db.SaveChanges();

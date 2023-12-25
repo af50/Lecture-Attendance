@@ -8,17 +8,18 @@ namespace LectureAttendance.Pages.Control.Add
     public class CourseModel : PageModel
     {
 
-
-        [Required(ErrorMessage = "This Field Is Required")]
         [BindProperty]
+        [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^[A-Z][A-Z][1-4][0-9][0-9]$", ErrorMessage = "The Course Code Should Consists Of Two Letters And Three Numbers")]
         public string CourseID { get; set; }
 
-        [Required(ErrorMessage = "This Field Is Required")]
         [BindProperty]
+        [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^[a-zA-Z0-9 ].$", ErrorMessage = "The Course Name Should Consists Of Only Letters And Numbers")]
         public string CourseName { get; set; }
         
-        [Required(ErrorMessage = "This Field Is Required")]
         [BindProperty]
+        [Required(ErrorMessage = "This Field Is Required")]
         public char CourseLevel { get; set; }
 
 

@@ -12,22 +12,27 @@ namespace LectureAttendance.Pages.Control.Update
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^[0-9]{14}$", ErrorMessage = "The Id Should Equals The Instructor's SSN")]
         public string InstructorId { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^[a-zA-Z]+ [a-zA-Z]$", ErrorMessage = "The Name Should Looks Like --> \"Salem Khaled\" With Out Quotes")]
         public string Name { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^[A-Z]{2}$", ErrorMessage = "The Department Name Should Consists Of Two Upper Letters")]
         public string Department { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^\w{5,20}\@attend\.ins\.edu$", ErrorMessage = "The Email Should Looks Like \"example@attend.ins.edu\" With Out Quotes")]
         public string Email { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^[^ ]{8,12}$", ErrorMessage = "The Password Should have 8-12 Charcters With No Spaces")]
         public string Password { get; set; }
 
         [BindProperty]

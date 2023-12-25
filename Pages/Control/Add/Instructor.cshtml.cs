@@ -11,22 +11,27 @@ namespace LectureAttendance.Pages.Control.Add
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^[0-9]{14}$", ErrorMessage = "The Id Should Equals The Instructor's SSN")]
         public string Id { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^[a-zA-Z]+ [a-zA-Z]$", ErrorMessage = "The Name Should Looks Like --> \"Salem Khaled\" With Out Quotes")]
         public string Name { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^[A-Z]{2}$", ErrorMessage = "The Department Name Should Consists Of Two Upper Letters")]
         public string Depart { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^\w{5,20}\@attend\.ins\.edu$", ErrorMessage = "The Email Should Looks Like \"example@attend.ins.edu\" With Out Quotes")]
         public string Email { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "This Field Is Required")]
+        [RegularExpression(@"^[^ ]{8,12}$", ErrorMessage = "The Password Should have 8-12 Charcters With No Spaces")]
         public string Password { get; set; }
 
         [BindProperty]
@@ -35,8 +40,8 @@ namespace LectureAttendance.Pages.Control.Add
         [BindProperty]
         public string BirthDate { get; set; }
 
-        [BindProperty]
         [Required]
+        [BindProperty]
         public string Gender { get; set; }
 
 

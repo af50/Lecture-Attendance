@@ -13,9 +13,6 @@ namespace LectureAttendance.Models
             //M:M
             modelBuilder.Entity<Enrollment>()
                 .HasKey(e => new { e.CourseId, e.StudentId });
-            //M:M
-            modelBuilder.Entity<InstructorStudent>()
-                .HasKey(e => new { e.StudentId, e.InstructorId });
             //Composite Key
             modelBuilder.Entity<Lecture>()
                 .HasKey(e => new { e.Location, e.DateOfLecture, e.StartTime });
@@ -29,7 +26,6 @@ namespace LectureAttendance.Models
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
-        public DbSet<InstructorStudent> InstructorsStudents { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
     }
 }
