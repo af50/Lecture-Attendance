@@ -26,6 +26,9 @@ namespace LectureAttendance.Models
         [DataType(DataType.Time)]
         public string EndTime{ get; set; }
 
+        [Required]
+        public bool IsStarted { get; set; } = false;
+
 
         public virtual Instructor Instructors { get; set; }
         public virtual Course Courses { get; set; }

@@ -5,6 +5,7 @@
     ViewBag.UserType = HttpContext.Session.GetString("Type");
     ViewData["Title"] = "Schedule";
 }
+    
 
 <head>
     <meta charset="utf-8">
@@ -15,9 +16,24 @@
 
 
 <body>
-    <div class="container-fluid" style="width:1000px; height:500px">
-        <table>
 
+    @if (Model.errorMessage.Length > 0)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>@Model.errorMessage</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    else if (Model.successMessage.Length > 0)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>@Model.successMessage</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @try
+    {
+        <table>
             <tr>
                 <th>Location</th>
                 <th>StartTime</th>
@@ -27,20 +43,112 @@
                 <th>Date</th>
             </tr>
 
-
-
-
-            @foreach (var lecture in Model.WhichList)
+            @if (HttpContext.Session.GetString("Type") == "Student")
             {
-                <tr>
-                    <td>@lecture.Location</td>
-                    <td>@lecture.StartTime</td>
-                    <td>@lecture.EndTime</td>
-                    <td>@lecture.InstructorId</td>
-                    <td>@lecture.CourseId</td>
-                    <td>@lecture.DateOfLecture</td>
-                    @if (HttpContext.Session.GetString("Type") == "Student")
-                    {
+                foreach (var lecture in Model.StudentLecturesList())
+                {
+                    <tr>
+                        <td>@lecture.Location</td>
+                        <td>@lecture.StartTime</td>
+                        <td>@lecture.EndTime</td>
+                        <td>@lecture.InstructorId</td>
+                        <td>@lecture.CourseId</td>
+                        <td>@lecture.DateOfLecture</td>
+
+                        <td>
+                            <form method="post">
+                                <input type="hidden" asp-for="Action" value="Register"/>
+                                <input type="hidden" asp-for="Location" value="@lecture.Location"/>
+                                <input type="hidden" asp-for="Date" value="@lecture.DateOfLecture"/>
+                                <input type="hidden" asp-for="StartTime" value="@lecture.StartTime"/>
+                                <button type="submit" class="btn" style="  display: inline-block;
+                    background-color: #172432;
+                    border: none;
+                    color: #ddd;
+                    padding: 10px 20px;
+                    border-radius: 5px;">
+                                    Register
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+            else if (HttpContext.Session.GetString("Type") == "Instructor")
+            {
+                foreach (var lecture in Model.InstructorLecturesList())
+                {
+                    <tr>
+                        <td>@lecture.Location</td>
+                        <td>@lecture.StartTime</td>
+                        <td>@lecture.EndTime</td>
+                        <td>@lecture.InstructorId</td>
+                        <td>@lecture.CourseId</td>
+                        <td>@lecture.DateOfLecture</td>
+
+                        <td>
+                            <form method="post">
+                                <input type="hidden" asp-for="Action" value="Start"/>
+                                <input type="hidden" asp-for="Location" value="@lecture.Location"/>
+                                <input type="hidden" asp-for="Date" value="@lecture.DateOfLecture"/>
+                                <input type="hidden" asp-for="StartTime" value="@lecture.StartTime"/>
+                                <button type="submit" class="btn" style="  display: inline-block;
+                        background-color: #172432;
+                        border: none;
+                        color: #ddd;
+                        padding: 10px 20px;
+                        border-radius: 5px;">
+                                    Start
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post">
+                                <input type="hidden" asp-for="Action" value="End"/>
+                                <input type="hidden" asp-for="Location" value="@lecture.Location"/>
+                                <input type="hidden" asp-for="Date" value="@lecture.DateOfLecture"/>
+                                <input type="hidden" asp-for="StartTime" value="@lecture.StartTime"/>
+                                <button type="submit" class="btn" style="  display: inline-block;
+                        background-color: #172432;
+                        border: none;
+                        color: #ddd;
+                        padding: 10px 20px;
+                        border-radius: 5px;">
+                                    End
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post">
+                                <input type="hidden" asp-for="Action" value="Report"/>
+                                <input type="hidden" asp-For="Location" value="@lecture.Location"/>
+                                <input type="hidden" asp-For="Date" value="@lecture.DateOfLecture"/>
+                                <input type="hidden" asp-For="StartTime" value="@lecture.StartTime"/>
+                                <button type="submit" class="btn" style="  display: inline-block;
+                        background-color: #172432;
+                        border: none;
+                        color: #ddd;
+                        padding: 10px 20px;
+                        border-radius: 5px;">
+                                    Report
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+            else if (HttpContext.Session.GetString("Type") == "Admin")
+            {
+                foreach (var lecture in Model.AdminLecturesList())
+                {
+                    <tr>
+                        <td>@lecture.Location</td>
+                        <td>@lecture.StartTime</td>
+                        <td>@lecture.EndTime</td>
+                        <td>@lecture.InstructorId</td>
+                        <td>@lecture.CourseId</td>
+                        <td>@lecture.DateOfLecture</td>
+
                         <td>
                             <button type="submit" class="btn" style="  display: inline-block;
                         background-color: #172432;
@@ -48,38 +156,17 @@
                         color: #ddd;
                         padding: 10px 20px;
                         border-radius: 5px;">
-                                Register
+                                Report
                             </button>
                         </td>
-                    }
-                    else if (HttpContext.Session.GetString("Type") == "Instructor")
-                    {
-                        <td>
-                            <button type="submit" class="btn" style="  display: inline-block;
-                            background-color: #172432;
-                            border: none;
-                            color: #ddd;
-                            padding: 10px 20px;
-                            border-radius: 5px;">
-                                Start
-                            </button>
-                        </td>
-                        <td>
-                            <button type="submit" class="btn" style="  display: inline-block;
-                            background-color: #172432;
-                            border: none;
-                            color: #ddd;
-                            padding: 10px 20px;
-                            border-radius: 5px;">
-                                End
-                            </button>
-                        </td>
-                    }
-                </tr>
+                    </tr>
+                }
             }
-
         </table>
-    </div>
-    
+    }
+    catch @* (NullReferenceException) *@
+    {
+        <p>There Are No Lectures Available</p>
+    }
 
 </body>

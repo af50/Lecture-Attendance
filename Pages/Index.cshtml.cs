@@ -1,5 +1,4 @@
-﻿using LectureAttendance.Migrations;
-using LectureAttendance.Models;
+﻿using LectureAttendance.Models;
 using LectureAttendance.Pages.Control.Update;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,9 +19,19 @@ namespace LectureAttendance.Pages
         }
 
         [BindProperty]
-        public IQueryable<Lecture> WhichList { get; set; }
+        public string Location { get; set; }
 
-        public void StudentLecturesList()
+        [BindProperty]
+        public string Date { get; set; }
+
+        [BindProperty]
+        public string StartTime { get; set; }
+
+        public string errorMessage = "";
+        public string successMessage = "";
+
+
+        public IQueryable<Lecture> StudentLecturesList()
         {
             IQueryable<Lecture> lectures = null;
             if (HttpContext.Session.GetString("Type") == "Student")
@@ -49,10 +58,10 @@ namespace LectureAttendance.Pages
                     }
                 }
             }
-            WhichList = lectures;
+            return lectures;
         }
 
-        public void InstructorLecturesList()
+        public IQueryable<Lecture> InstructorLecturesList()
         {
             var InstructorLecturesList = from lec in db.Lectures where lec.InstructorId == HttpContext.Session.GetString("ID") select lec;
             if (!InstructorLecturesList.IsNullOrEmpty())
@@ -63,10 +72,10 @@ namespace LectureAttendance.Pages
                     l.InstructorId = (from instructor in db.Instructors where l.InstructorId == instructor.InstructorId select instructor.Name).SingleOrDefault();
                 }
             }
-            WhichList = InstructorLecturesList;
+            return InstructorLecturesList;
         }
 
-        public void AdminLecturesList()
+        public IQueryable<Lecture> AdminLecturesList()
         {
             var AdminLecturesList = from lec in db.Lectures select lec;
             if (!AdminLecturesList.IsNullOrEmpty())
@@ -77,7 +86,7 @@ namespace LectureAttendance.Pages
                     l.InstructorId = (from instructor in db.Instructors where l.InstructorId == instructor.InstructorId select instructor.Name).SingleOrDefault();
                 }
             }
-            WhichList = AdminLecturesList;
+            return AdminLecturesList;
         }
         public IActionResult OnGet()
         {
@@ -104,6 +113,69 @@ namespace LectureAttendance.Pages
             {
                 return Page();
             }
+        }
+
+        [BindProperty]
+        public string Action { get; set; }
+
+        public IActionResult OnPost()
+        {
+            if (Action == "Start")
+            {
+                var lec = db.Lectures.FirstOrDefault(lecture => lecture.Location == Location
+                && lecture.DateOfLecture == Date && lecture.StartTime == StartTime);
+                if (lec != null && lec.IsStarted == false)
+                {
+                    lec.IsStarted = true;
+                    db.SaveChanges();
+                    successMessage = "The Lecture Has Been Started!";
+                }
+                else errorMessage = "The Lecture Is Starts Already!";
+                return Page();
+            }
+            else if (Action == "End")
+            {
+                var lec = db.Lectures.FirstOrDefault(lecture => lecture.Location == Location
+                && lecture.DateOfLecture == Date && lecture.StartTime == StartTime);
+                if (lec != null && lec.IsStarted == true)
+                {
+                    lec.IsStarted = false;
+                    db.SaveChanges();
+                    successMessage = "The Lecture Has Been Ended!";
+                }
+                else errorMessage = "The Lecture Is Ended Already!";
+                return Page();
+            }
+            else if (Action == "Report")
+            {
+                return RedirectToPage("/Report", new { location = Location, date = Date, startTime = StartTime });
+            }
+            else if (Action == "Register")
+            {
+                var lec = db.Lectures.FirstOrDefault(lecture => lecture.Location == Location
+                && lecture.DateOfLecture == Date && lecture.StartTime == StartTime);
+                if (lec.IsStarted)
+                {
+                    Attendance attendance = new Attendance();
+                    attendance.StudentID = HttpContext.Session.GetString("ID");
+                    attendance.LecturesLocation = Location;
+                    attendance.LecturesDateOfLecture = Date;
+                    attendance.LecturesStartTime = StartTime;
+                    attendance.LectureAttendanceTime = DateTime.Now.TimeOfDay.ToString();
+
+                    try
+                    {
+                        db.Attendances.Add(attendance);
+                        db.SaveChanges();
+                        successMessage = "Register Done!";
+                    }
+                    catch { errorMessage = "Registered!"; }
+                }
+                else errorMessage = "The Lecture Has Not Started Yet!";
+
+                return Page();
+            }
+            else return Page();
         }
     }
 }

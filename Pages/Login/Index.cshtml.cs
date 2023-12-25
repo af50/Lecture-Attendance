@@ -49,8 +49,8 @@ namespace LectureAttendance.Pages.Login
             }
 			else
             {
-                ErrorMessage = "Invalid Email or Password!";
-                return RedirectToPage("/Login/Index");
+                ErrorMessage = "Invalid Email Or Password!";
+                return Page();
             }
         }
     }
